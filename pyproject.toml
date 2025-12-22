@@ -16,6 +16,7 @@ dev = [
 members = ["01_data_collection", "02_data_preprocessing"]
 
 [tool.pytest.ini_options]
+pythonpath = ["01_data_collection", "02_data_preprocessing"]
 addopts = "--cov --cov-report=term-missing"
 
 [tool.coverage.run]
