@@ -1,0 +1,15 @@
+[project]
+name = "04_word_representations"
+version = "0.1.0"
+description = "Word Representations module for Romanian NLP"
+dependencies = [
+    "pandas",
+    "scikit-learn",
+    "rank_bm25",
+    "matplotlib",
+    "seaborn",
+    "wordcloud",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

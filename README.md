@@ -28,9 +28,24 @@ This dataset is fairly clean. We normalize diacritics, normalize dates, and toke
 
 In [`03_exploratory_data_analysis`](03_exploratory_data_analysis) we explore the dataset through temporal analysis, topic modeling, and clustering.
 
-### Sparse word representations
+### Word representations
 
-### Dense word representations
+In [`04_word_representations`](04_word_representations) we explore different word representations.
+
+#### Sparse representations
+We implement and visualize:
+- Bag of Words (BoW)
+- TF-IDF
+
+We apply these to the ANPC dataset for:
+- Authorship Identification
+- Seasonal Analysis
+
+#### Dense representations
+- static: word2vec, glove, fasttext
+- contextual: transformers
+
 ### Morphological analysis, WordNet
-### Transformers, LLMs
+### Transformers
+### LLMs
 ### Feature importance, explainability

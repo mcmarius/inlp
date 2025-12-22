@@ -7,6 +7,7 @@ members = [
     "01-data-collection",
     "02-data-preprocessing",
     "03-exploratory-data-analysis",
+    "04-word-representations",
     "romanian-nlp-lab",
 ]
 
@@ -126,6 +127,29 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [{ name = "pytest", specifier = ">=9.0.2" }]
+
+[[package]]
+name = "04-word-representations"
+version = "0.1.0"
+source = { virtual = "04_word_representations" }
+dependencies = [
+    { name = "matplotlib" },
+    { name = "pandas" },
+    { name = "rank-bm25" },
+    { name = "scikit-learn" },
+    { name = "seaborn" },
+    { name = "wordcloud" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "matplotlib" },
+    { name = "pandas" },
+    { name = "rank-bm25" },
+    { name = "scikit-learn" },
+    { name = "seaborn" },
+    { name = "wordcloud" },
+]
 
 [[package]]
 name = "annotated-types"
