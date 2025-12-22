@@ -42,4 +42,7 @@ jobs:
 
     - name: Run Tests with Coverage
       run: |
+        uv run python -c "import nltk; nltk.download('stopwords'); nltk.download('punkt_tab')"
+        uv run python -c "import stanza; stanza.download('ro')"
+        uv run python -c "import spacy; spacy.cli.download('ro_core_news_sm')"
         uv run pytest
