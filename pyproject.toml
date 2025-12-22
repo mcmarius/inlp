@@ -13,7 +13,7 @@ dev = [
 ]
 
 [tool.uv.workspace]
-members = ["01_data_collection"]
+members = ["01_data_collection", "02_data_preprocessing"]
 
 [tool.pytest.ini_options]
 addopts = "--cov --cov-report=term-missing"

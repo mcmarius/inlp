@@ -18,7 +18,11 @@ We use [Playwright](https://playwright.dev/) to render each page and extract the
 
 ### Data preprocessing
 
-In `02_data_preprocessing` we will preprocess the dataset.
+In [`02_data_preprocessing`](02_data_preprocessing) we will preprocess the dataset.
+
+#### ANPC Press Releases
+
+This dataset is fairly clean. We normalize diacritics, normalize dates, and tokenize the text.
 
 ### Exploratory data analysis
 
