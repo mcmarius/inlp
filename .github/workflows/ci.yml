@@ -1,4 +1,4 @@
-name: Module 01 CI
+name: Python CI
 
 on:
   push:
