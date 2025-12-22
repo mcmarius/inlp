@@ -1,0 +1,45 @@
+name: Module 01 CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
+        cache-dependency-glob: "**/uv.lock"
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version-file: "pyproject.toml"
+
+    - name: Install dependencies
+      run: uv sync --all-packages --all-extras
+
+    - name: Cache Playwright browsers
+      id: playwright-cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ hashFiles('**/uv.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-playwright-
+
+    - name: Install Playwright Browsers
+      if: steps.playwright-cache.outputs.cache-hit != 'true'
+      run: uv run --package 01-data-collection playwright install chromium
+
+    - name: Run Tests with Coverage
+      run: |
+        uv run pytest
