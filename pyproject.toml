@@ -1,0 +1,16 @@
+[project]
+name = "romanian-nlp-lab"
+version = "0.1.0"
+description = "A collection of modules for Romanian NLP"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio>=0.21.0",
+]
+
+[tool.uv.workspace]
+members = ["01_data_collection"]

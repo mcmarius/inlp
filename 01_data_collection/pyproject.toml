@@ -1,0 +1,35 @@
+[project]
+name = "01-data-collection"
+version = "0.1.0"
+description = "Module 01: Data Collection - Web scraping for NLP datasets"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib>=3.10.8",
+    "playwright>=1.40.0",
+    "selenium>=4.15.0",
+    "webdriver-manager>=4.0.0",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=4.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "jupytext>=1.15.0",
+    "jupyter>=1.0.0",
+]
+
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "--cov=scrapers --cov-report=term-missing"
+
+[tool.coverage.run]
+omit = ["scrapers/anpc_scraper_selenium.py"]
+
+[tool.jupytext]
+formats = "notebooks///ipynb,notebooks///py:percent"
