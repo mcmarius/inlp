@@ -123,3 +123,10 @@ Coverage configuration is managed in the root `pyproject.toml`. To check coverag
 # From the repository root:
 uv run pytest
 ```
+
+## TODO
+
+Fix the scraper to properly extract all content. Examples where the scraper fails:
+- [here](https://anpc.ro/peste-100-de-mari-magazine-controlate-de-anpc-in-ultima-saptamana-in-toata-tara/)
+- [here](https://anpc.ro/anpc-controleaza-gazprom-lukoil-si-magazinele-berezka-in-toata-tara/)
+- [here](https://anpc.ro/programul-academia-comisarilor-tineri-initiat-de-anpc-incepe-cu-un-amplu-control-intr-un-mall-bucurestean/)
