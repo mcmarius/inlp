@@ -57,7 +57,7 @@ uv run python -m preprocessing.process_dataset
 Generate the notebook:
 
 ```bash
-uv run jupytext --update --to ipynb notebooks/02_preprocessing_walkthrough.py
+uv run jupytext --update --to ipynb notebooks/02_preprocessing.py
 ```
 
 ## Data Flow
