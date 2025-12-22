@@ -161,16 +161,15 @@ print(f"\nScraped {len(articles)} articles")
 
 # %%
 # Let's examine one article
-if articles:
-    article = articles[0]
-    print("=" * 60)
-    print(f"Title: {article['title']}")
-    print(f"Date: {article['date']}")
-    print(f"Time: {article['time']}")
-    print(f"URL: {article['url']}")
-    print("=" * 60)
-    print("\nContent preview (first 500 chars):")
-    print(article['content'] if article['content'] else "(no content)")
+article = articles[0]
+print("=" * 60)
+print(f"Title: {article['title']}")
+print(f"Date: {article['date']}")
+print(f"Time: {article['time']}")
+print(f"URL: {article['url']}")
+print("=" * 60)
+print("\nContent preview (first 500 chars):")
+print(article['content'] if article['content'] else "(no content)")
 
 # %% [markdown]
 # ## 6. Exploring the Scraped Data
@@ -181,23 +180,18 @@ from pathlib import Path
 
 # Load all scraped articles
 data_file = Path("../data/processed/articles_anpc.json")
-if data_file.exists():
-    with open(data_file, "r", encoding="utf-8") as f:
-        all_articles = json.load(f)
-    print(f"Total articles: {len(all_articles)}")
-else:
-    all_articles = articles  # Use what we just scraped
-    print(f"Using freshly scraped articles: {len(all_articles)}")
+with open(data_file, "r", encoding="utf-8") as f:
+    all_articles = json.load(f)
+print(f"Total articles: {len(all_articles)}")
 
 # %%
 # Basic statistics
-if all_articles:
-    content_lengths = [len(a.get("content", "")) for a in all_articles]
-    
-    print(f"Articles with content: {sum(1 for l in content_lengths if l > 0)}")
-    print(f"Average content length: {sum(content_lengths) / len(content_lengths):.0f} chars")
-    print(f"Shortest: {min(content_lengths)} chars")
-    print(f"Longest: {max(content_lengths)} chars")
+content_lengths = [len(a.get("content", "")) for a in all_articles]
+
+print(f"Articles with content: {sum(1 for l in content_lengths if l > 0)}")
+print(f"Average content length: {sum(content_lengths) / len(content_lengths):.0f} chars")
+print(f"Shortest: {min(content_lengths)} chars")
+print(f"Longest: {max(content_lengths)} chars")
 
 # %% [markdown]
 # ## 7. Visualizing the Data
@@ -207,17 +201,16 @@ if all_articles:
 
 import matplotlib.pyplot as plt
 
-if all_articles and any(content_lengths):
-    plt.figure(figsize=(10, 4))
-    plt.hist(content_lengths, bins=20, edgecolor='black', alpha=0.7)
-    plt.xlabel('Content Length (characters)')
-    plt.ylabel('Number of Articles')
-    plt.title('Distribution of Article Content Length')
-    plt.axvline(sum(content_lengths)/len(content_lengths), 
-                color='red', linestyle='--', label='Mean')
-    plt.legend()
-    plt.tight_layout()
-    plt.show()
+plt.figure(figsize=(10, 4))
+plt.hist(content_lengths, bins=20, edgecolor='black', alpha=0.7)
+plt.xlabel('Content Length (characters)')
+plt.ylabel('Number of Articles')
+plt.title('Distribution of Article Content Length')
+plt.axvline(sum(content_lengths)/len(content_lengths), 
+            color='red', linestyle='--', label='Mean')
+plt.legend()
+plt.tight_layout()
+plt.show()
 
 # %% [markdown]
 # ## 8. Raw HTML Storage
@@ -230,19 +223,15 @@ if all_articles and any(content_lengths):
 # %%
 # Check raw HTML files
 raw_html_dir = Path("../data/raw_html")
-if raw_html_dir.exists():
-    html_files = list(raw_html_dir.glob("*.html"))
-    print(f"Raw HTML files: {len(html_files)}")
-    
-    if html_files:
-        # Show sample
-        sample_file = html_files[0]
-        content = sample_file.read_text(encoding="utf-8")
-        print(f"\nSample file: {sample_file.name}")
-        print(f"Size: {len(content):,} bytes")
-        print(f"Preview: {content[:200]}...")
-else:
-    print("No raw HTML files yet - run the scraper first")
+html_files = list(raw_html_dir.glob("*.html"))
+print(f"Raw HTML files: {len(html_files)}")
+
+# Show sample
+sample_file = html_files[0]
+content = sample_file.read_text(encoding="utf-8")
+print(f"\nSample file: {sample_file.name}")
+print(f"Size: {len(content):,} bytes")
+print(f"Preview: {content[:200]}...")
 
 # %% [markdown]
 # ## 9. Comparing Playwright vs Selenium

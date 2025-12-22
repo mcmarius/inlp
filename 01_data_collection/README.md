@@ -83,7 +83,7 @@ The notebooks are stored in `.py` (percent format) for better version control. T
 
 ```bash
 # Generate the .ipynb file
-uv run jupytext --to ipynb notebooks/01_scraping_anpc.py
+uv run jupytext --update --to ipynb notebooks/01_scraping_anpc.py
 ```
 
 Then open the notebook for a walkthrough:

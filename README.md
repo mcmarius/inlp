@@ -26,7 +26,7 @@ This dataset is fairly clean. We normalize diacritics, normalize dates, and toke
 
 ### Exploratory data analysis
 
-In `03_exploratory_data_analysis` we will explore the dataset.
+In [`03_exploratory_data_analysis`](03_exploratory_data_analysis) we explore the dataset through temporal analysis, topic modeling, and clustering.
 
 ### Sparse word representations
 

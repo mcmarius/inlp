@@ -78,12 +78,10 @@ import json
 from preprocessing.process_dataset import INPUT_FILE, process_dataset
 
 # Let's look at one raw article before processing
-if INPUT_FILE.exists():
-    with open(INPUT_FILE, "r", encoding="utf-8") as f:
-        raw_data = json.load(f)
-        if raw_data:
-            print("Raw Article Example:")
-            print(json.dumps(raw_data[0], indent=2, ensure_ascii=False)[:500] + "...")
+with open(INPUT_FILE, "r", encoding="utf-8") as f:
+    raw_data = json.load(f)
+    print("Raw Article Example:")
+    print(json.dumps(raw_data[0], indent=2, ensure_ascii=False)[:500] + "...")
 
 # %%
 # Run the full pipeline
@@ -92,14 +90,12 @@ process_dataset()
 # %%
 # Look at the processed result
 OUTPUT_FILE = Path.cwd().parent / "data" / "processed" / "articles_anpc_preprocessed.json"
-if OUTPUT_FILE.exists():
-    with open(OUTPUT_FILE, "r", encoding="utf-8") as f:
-        processed_data = json.load(f)
-        if processed_data:
-            print("\nProcessed Article Example:")
-            # Show the new fields added during preprocessing
-            example = processed_data[0]
-            print(f"Title Cleaned: {example.get('title_cleaned')}")
-            print(f"Date ISO: {example.get('date_iso')}")
-            print(f"Tokens (first 5): {example.get('content_tokens')[:5]}")
-            print(f"Lemmatized Content (snippet): {example.get('lemmatized_content')[:200]}...")
+with open(OUTPUT_FILE, "r", encoding="utf-8") as f:
+    processed_data = json.load(f)
+    print("\nProcessed Article Example:")
+    # Show the new fields added during preprocessing
+    example = processed_data[0]
+    print(f"Title Cleaned: {example.get('title_cleaned')}")
+    print(f"Date ISO: {example.get('date_iso')}")
+    print(f"Tokens (first 5): {example.get('content_tokens')[:5]}")
+    print(f"Lemmatized Content (snippet): {example.get('lemmatized_content')[:200]}...")

@@ -34,6 +34,9 @@ Beyond the basic cleaning implemented in this module, other common NLP preproces
 # Sync dependencies
 uv sync --all-extras
 
+# Download nltk data
+uv run python -c "import nltk; nltk.download('stopwords'); nltk.download('punkt_tab')"
+
 # Download Romanian Stanza model
 uv run python -c "import stanza; stanza.download('ro')"
 
@@ -54,7 +57,7 @@ uv run python -m preprocessing.process_dataset
 Generate the notebook:
 
 ```bash
-uv run jupytext --to ipynb notebooks/02_preprocessing_walkthrough.py
+uv run jupytext --update --to ipynb notebooks/02_preprocessing_walkthrough.py
 ```
 
 ## Data Flow
