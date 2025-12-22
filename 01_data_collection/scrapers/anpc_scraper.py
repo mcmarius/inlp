@@ -48,7 +48,7 @@ INITIAL_BACKOFF_SECONDS = 2.0
 DATA_DIR = Path(__file__).parent.parent / "data"
 RAW_HTML_DIR = DATA_DIR / "raw_html"
 PROCESSED_DIR = DATA_DIR / "processed"
-ARTICLES_JSON = PROCESSED_DIR / "articles.json"
+ARTICLES_JSON = PROCESSED_DIR / "articles_anpc.json"
 
 
 def get_slug_from_url(url: str) -> str:
@@ -222,13 +222,45 @@ def parse_article_html(html_content: str, url: str) -> dict:
         content_div = soup.find("div", class_="brz-rich-text") or soup.find("div", class_="entry-content")
     
     if content_div:
+        # Use a temporary uniquely identifiable separator that isn't a space
+        # to distinguish between tag boundaries and actual spaces in text.
+        sep = "|||"
+        
+        def get_robust_text(element):
+            # First, preserve line breaks by replacing <br> with the separator
+            for br in element.find_all("br"):
+                br.replace_with(sep)
+            
+            raw_text = element.get_text(separator=sep).strip()
+            
+            # Now apply the user's requested logic:
+            # 1. Elements split by one space (the separator) -> disappear
+            # 2. Multiple spaces (separator + space + separator) -> one space
+            # In our case, with sep='|||':
+            # "Word1|||Word2" -> "Word1Word2"
+            # "Word1||| |||Word2" -> "Word1 Word2"
+            
+            # Handle real spaces (which might be wrapped in seps or next to them)
+            # Replace sep followed by space or space followed by sep with a single space placeholder
+            text = re.sub(r'\|\|\|\s+\|\|\|', ' ', raw_text)
+            text = re.sub(r'\|\|\|\s+', ' ', text)
+            text = re.sub(r'\s+\|\|\|', ' ', text)
+            
+            # Now remove remaining separators (which represent tag boundaries with no spaces)
+            text = text.replace(sep, "")
+            
+            # Finally, collapse any remaining multiple spaces
+            text = re.sub(r'\s+', ' ', text)
+            return text.strip()
+
         # Extract text from paragraphs if they exist
-        paragraphs = [p.get_text(strip=True) for p in content_div.find_all("p") if p.get_text(strip=True)]
+        paragraphs = [get_robust_text(p) for p in content_div.find_all("p") if get_robust_text(p)]
+        
         if paragraphs:
             content_text = "\n\n".join(paragraphs)
         else:
             # Fallback to direct text if no paragraphs are found
-            content_text = content_div.get_text(strip=True, separator="\n\n")
+            content_text = get_robust_text(content_div)
 
     # Extract date and time from post info
     date_text = ""
@@ -368,48 +400,44 @@ def reprocess_saved_html() -> list[dict]:
     without re-scraping the web.
     """
     if not ARTICLES_JSON.exists():
-        logger.warning("No articles JSON found. Reprocessing might be limited to raw files.")
-        existing_articles = {}
-    else:
-        existing_articles = load_existing_articles()
-        
-    if not RAW_HTML_DIR.exists():
-        logger.error(f"Raw HTML directory not found: {RAW_HTML_DIR}")
+        logger.error(f"Articles JSON not found at {ARTICLES_JSON}")
         return []
-    
-    # We need a mapping from slug to URL if we want to update existing entries
-    # Or we can just iterate over the JSON entries that have `raw_html_path`
-    
-    reprocessed_count = 0
-    # Map raw html file back to URL using existing data if possible
-    path_to_url = {a["raw_html_path"]: a["url"] for a in existing_articles.values() if "raw_html_path" in a}
-    
-    for html_file in RAW_HTML_DIR.glob("*.html"):
-        path_str = str(html_file)
-        url = path_to_url.get(path_str)
         
-        # If we don't have the URL in existing data, we might not be able to fully reprocess 
-        # unless we find another way to recover the URL (maybe from the HTML itself?)
-        if not url:
-            # Fallback: simple heuristic or skip
+    existing_articles = load_existing_articles()
+    reprocessed_count = 0
+    
+    print(f"Reprocessing {len(existing_articles)} entries from raw HTML...")
+    
+    for url, article in existing_articles.items():
+        raw_path = article.get("raw_html_path")
+        if not raw_path:
+            continue
+            
+        # The raw_path is relative to the module or project root
+        # Here we try to resolve it relative to ARTICLES_JSON's parent or project root
+        # In this scraper, it's usually relative to project root or stored as relative path
+        full_path = RAW_HTML_DIR / Path(raw_path).name
+        
+        if not full_path.exists():
+            logger.warning(f"Raw HTML file not found: {full_path}")
             continue
             
         try:
-            with open(html_file, "r", encoding="utf-8") as f:
-                content = f.read()
+            with open(full_path, "r", encoding="utf-8") as f:
+                html_content = f.read()
             
-            data = parse_article_html(content, url)
+            # Parse with latest logic
+            data = parse_article_html(html_content, url)
             
             # Update the entry
-            if url in existing_articles:
-                existing_articles[url].update(data)
-                reprocessed_count += 1
+            article.update(data)
+            reprocessed_count += 1
         except Exception as e:
-            logger.error(f"Error reprocessing {html_file}: {e}")
+            logger.error(f"Error reprocessing {url}: {e}")
             
     if reprocessed_count > 0:
         save_articles(existing_articles)
-        logger.info(f"Reprocessed {reprocessed_count} articles from raw HTML.")
+        logger.info(f"Successfully reprocessed {reprocessed_count} articles.")
     
     return list(existing_articles.values())
 
@@ -456,7 +484,13 @@ def scrape_page(page_num: int, max_articles: Optional[int] = None) -> list[dict]
 
 
 if __name__ == "__main__":
-    # Run the full scraper
-    logger.info("Starting ANPC scraper...")
-    articles = asyncio.run(scrape_articles())
-    logger.info(f"Finished scraping {len(articles)} articles")
+    import sys
+    
+    if len(sys.argv) > 1 and sys.argv[1] == "--reprocess":
+        logger.info("Starting reprocessing of saved HTML files...")
+        reprocess_saved_html()
+    else:
+        # Run the full scraper
+        logger.info("Starting ANPC scraper...")
+        articles = asyncio.run(scrape_articles())
+        logger.info(f"Finished scraping {len(articles)} articles")

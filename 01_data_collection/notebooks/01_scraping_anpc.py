@@ -180,7 +180,7 @@ import json
 from pathlib import Path
 
 # Load all scraped articles
-data_file = Path("../data/processed/articles.json")
+data_file = Path("../data/processed/articles_anpc.json")
 if data_file.exists():
     with open(data_file, "r", encoding="utf-8") as f:
         all_articles = json.load(f)
@@ -229,7 +229,7 @@ if all_articles and any(content_lengths):
 
 # %%
 # Check raw HTML files
-raw_html_dir = Path("./data/raw_html")
+raw_html_dir = Path("../data/raw_html")
 if raw_html_dir.exists():
     html_files = list(raw_html_dir.glob("*.html"))
     print(f"Raw HTML files: {len(html_files)}")

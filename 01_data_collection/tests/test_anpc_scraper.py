@@ -45,7 +45,7 @@ class TestLoadExistingArticles:
             assert result == {}
     
     def test_loads_existing_articles(self, tmp_path):
-        articles_file = tmp_path / "articles.json"
+        articles_file = tmp_path / "articles_anpc.json"
         articles = [
             {"url": "https://example.com/1", "title": "Article 1"},
             {"url": "https://example.com/2", "title": "Article 2"},
@@ -63,7 +63,7 @@ class TestSaveArticles:
     """Tests for saving articles."""
     
     def test_saves_articles_to_json(self, tmp_path):
-        output_file = tmp_path / "processed" / "articles.json"
+        output_file = tmp_path / "processed" / "articles_anpc.json"
         articles = {
             "https://example.com/1": {"url": "https://example.com/1", "title": "Test"},
         }
@@ -286,7 +286,7 @@ class TestDeduplication:
         existing_articles = [
             {"url": "https://anpc.ro/existing/", "title": "Existing"}
         ]
-        articles_file = tmp_path / "articles.json"
+        articles_file = tmp_path / "articles_anpc.json"
         articles_file.write_text(json.dumps(existing_articles), encoding="utf-8")
         
         with patch.object(anpc_scraper, "ARTICLES_JSON", articles_file):

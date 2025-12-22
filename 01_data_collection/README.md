@@ -59,7 +59,7 @@ uv run python -c "from scrapers.anpc_scraper import scrape_articles; scrape_arti
 ## Data Output
 
 - `data/raw_html/` - Raw rendered HTML files
-- `data/processed/articles.json` - Structured JSON with extracted fields
+- `data/processed/articles_anpc.json` - Structured JSON with extracted fields
 
 
 ## Notebooks
