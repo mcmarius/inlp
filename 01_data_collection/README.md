@@ -95,6 +95,15 @@ uv run jupyter notebook notebooks/01_scraping_anpc.ipynb
 
 ## Tests
 
+It is recommended to run tests from the **project root** to ensure consistent coverage reporting across the entire workspace:
+
+```bash
+# From the repository root:
+uv run pytest
+```
+
+If running from within this directory:
+
 ```bash
 # Run all tests (unit + e2e)
 uv run pytest tests/ -v
@@ -108,8 +117,9 @@ uv run pytest tests/test_anpc_scraper_e2e.py -v
 
 ### Code Coverage
 
-To check how much of the scraper code is covered by tests:
+Coverage configuration is managed in the root `pyproject.toml`. To check coverage (includes global ignore rules):
 
 ```bash
-uv run pytest --cov=scrapers --cov-report=term-missing tests/
+# From the repository root:
+uv run pytest
 ```

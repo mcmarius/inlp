@@ -26,10 +26,6 @@ dev = [
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
-addopts = "--cov=scrapers --cov-report=term-missing"
-
-[tool.coverage.run]
-omit = ["scrapers/anpc_scraper_selenium.py"]
 
 [tool.jupytext]
 formats = "notebooks///ipynb,notebooks///py:percent"

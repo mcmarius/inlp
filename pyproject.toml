@@ -14,3 +14,12 @@ dev = [
 
 [tool.uv.workspace]
 members = ["01_data_collection"]
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-report=term-missing"
+
+[tool.coverage.run]
+omit = [
+    "**/anpc_scraper_selenium.py",
+    "**/tests/**",
+]
