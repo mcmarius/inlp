@@ -9,6 +9,9 @@ dependencies = [
     "matplotlib",
     "seaborn",
     "wordcloud",
+    "gensim",
+    "umap-learn",
+    "adjustText",
 ]
 
 [tool.pytest.ini_options]
