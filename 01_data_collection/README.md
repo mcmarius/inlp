@@ -39,7 +39,7 @@ This separation allows for **reprocessing** the entire dataset (e.g., if extract
 
 ### Robust Extraction Strategy
 
-The ANPC website uses the Brizy page builder, which results in complex and sometimes inconsistent HTML structures. Our parser uses a multi-tiered approach:
+The ANPC website uses a custom obfuscated script for page hydration, which results in complex and sometimes inconsistent HTML structures. From the CSS classes, we can infer the Brizy page builder is used. Our parser uses a multi-tiered approach:
 - **Class-based selectors**: Primarily targets stable classes like `brz-wp-post-content` (content) and `brz-wp__postinfo` (metadata).
 - **Fallback paths**: Uses precise `nth-of-type` selectors if the preferred classes are missing.
 - **Data Cleanup**: Automatic cleaning of titles and normalization of whitespace.

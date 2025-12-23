@@ -12,7 +12,7 @@ In [`01_data_collection`](01_data_collection) we will build a dataset from scrat
 
 For now, we are using web scraping to extract press release articles from the [ANPC website](https://anpc.ro/category/comunicate-de-presa/).
 
-The ANPC website uses the Brizy page builder, which requires a JS runtime to render the page (by the way, in the hydration script, there is `var maioneza`; can't make this up).
+The ANPC website uses a custom script to hydrate the page, which requires a JS runtime to render the actual page. By the way, in the hydration script, there is `var maioneza`; can't make this up. In early 2025 when I made a simple shell script with `curl`, the `maioneza` was not there.
 
 We use [Playwright](https://playwright.dev/) to render each page and extract the HTML.
 
@@ -46,6 +46,6 @@ We apply these to the ANPC dataset for:
 - contextual: transformers
 
 ### Morphological analysis, WordNet
-### Transformers
+### Transformers, BerTopic, SBert
 ### LLMs
 ### Feature importance, explainability
