@@ -13,9 +13,9 @@
 # ---
 
 # %% [markdown]
-# # Module 04: Dense Word Representations (Embeddings)
+# # Lesson 04: Dense Word Representations (Embeddings)
 #
-# In this module, we move beyond sparse representations (BoW, TF-IDF) to **dense vectors**. 
+# In this lesson, we move beyond sparse representations (BoW, TF-IDF) to **dense vectors**.
 # We will explore how words can be represented as high-dimensional points in space, capturing semantic relationships through the "company they keep".
 #
 # **Key Concepts**:

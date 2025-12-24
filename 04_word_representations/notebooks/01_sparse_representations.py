@@ -13,9 +13,9 @@
 # ---
 
 # %% [markdown]
-# # Module 04: Word Representations (Sparse)
+# # Lesson 04: Word Representations (Sparse)
 #
-# In this module, we explore sparse word representations using the ANPC press releases dataset.
+# In this lesson, we explore sparse word representations using the ANPC press releases dataset.
 # We will cover:
 # 1. **Bag of Words (BoW)**
 # 2. **TF-IDF**
@@ -50,7 +50,7 @@ from tasks.seasonal_analysis import SeasonalAnalyzer
 # %% [markdown]
 # ## 1. Load Preprocessed Data
 #
-# We use the preprocessed ANPC data from Module 02.
+# We use the preprocessed ANPC data from Lesson 02.
 
 # %%
 data_path = "../../02_data_preprocessing/data/processed/articles_anpc_preprocessed.json"

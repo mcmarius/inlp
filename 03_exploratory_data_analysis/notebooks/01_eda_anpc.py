@@ -14,7 +14,7 @@
 # ---
 
 # %% [markdown]
-# # Module 03: Exploratory Data Analysis - ANPC Press Releases
+# # Lesson 03: Exploratory Data Analysis - ANPC Press Releases
 #
 # This notebook explores the preprocessed ANPC dataset, focusing on temporal patterns and content distributions.
 

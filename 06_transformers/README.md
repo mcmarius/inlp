@@ -1,6 +1,6 @@
-# Module 06: Transformers Applications
+# Lesson 06: Transformers Applications
 
-In this module, we advance from static and basic contextual embeddings to full-fledged **Transformer applications**. We explore Sequence-to-Sequence tasks and advanced topic modeling, building on the concepts from Module 04.
+In this lesson, we advance from static and basic contextual embeddings to full-fledged **Transformer applications**. We explore Sequence-to-Sequence tasks and advanced topic modeling, building on the concepts from Lesson 04.
 
 ## Objectives
 
@@ -22,9 +22,9 @@ In this module, we advance from static and basic contextual embeddings to full-f
 
 1.  Generate the notebook from the JupyText script:
     ```bash
-    uv run jupytext --update --to ipynb notebooks/08_transformers_applications.py
+    uv run jupytext --update --to ipynb notebooks/01_transformers_applications.py
     ```
-2.  Explore `notebooks/08_transformers_applications.ipynb`.
+2.  Explore `notebooks/01_transformers_applications.ipynb`.
 
 ## Models Used
 

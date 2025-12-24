@@ -13,7 +13,7 @@
 # ---
 
 # %% [markdown]
-# # Module 04: Contextual Word Representations (Transformers)
+# # Lesson 04: Contextual Word Representations (Transformers)
 #
 # In previous lessons, we explored static embeddings (Word2Vec, FastText). While powerful, static embeddings have a fundamental limitation: **one word = one vector**.
 #

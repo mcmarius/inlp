@@ -1,6 +1,6 @@
-# Module 05: Morphological Analysis and WordNet
+# Lesson 05: Morphological Analysis and WordNet
 
-In this module, we explore the structural and semantic layers of the Romanian language using the ANPC press releases dataset. We focus on:
+In this lesson, we explore the structural and semantic layers of the Romanian language using the ANPC press releases dataset. We focus on:
 
 - **POS Tagging (Part-of-Speech)**: Identifying nouns, verbs, adjectives, etc., to understand stylistic patterns.
 - **NER (Named Entity Recognition)**: Extracting organizations, locations, and people mentioned in the press releases.
@@ -27,9 +27,9 @@ We continue using the **ANPC Press Releases** dataset, which provides a rich sou
 
 1. Generate the notebook from the JupyText script:
    ```bash
-   uv run jupytext --update --to ipynb notebooks/07_morphology_and_wordnet.py
+   uv run jupytext --update --to ipynb notebooks/01_morphology_and_wordnet.py
    ```
-2. Explore `notebooks/07_morphology_and_wordnet.ipynb` to see the results.
+2. Explore `notebooks/01_morphology_and_wordnet.ipynb` to see the results.
 3. Run the unit tests:
    ```bash
    uv run pytest tests/

@@ -9,7 +9,7 @@ members = [
     "03-exploratory-data-analysis",
     "04-word-representations",
     "06-transformers",
-    "09-explainability",
+    "08-explainability",
     "romanian-nlp-lab",
 ]
 
@@ -215,9 +215,9 @@ requires-dist = [
 dev = [{ name = "pytest" }]
 
 [[package]]
-name = "09-explainability"
+name = "08-explainability"
 version = "0.1.0"
-source = { virtual = "09_explainability" }
+source = { virtual = "08_explainability" }
 dependencies = [
     { name = "bertviz" },
     { name = "jupytext" },

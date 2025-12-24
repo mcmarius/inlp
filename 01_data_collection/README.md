@@ -1,6 +1,6 @@
-# Module 01: Data Collection
+# Lesson 01: Data Collection
 
-This module covers web scraping techniques to build NLP datasets from scratch.
+This lesson covers web scraping techniques to build NLP datasets from scratch.
 
 
 ## Setup

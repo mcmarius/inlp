@@ -1,6 +1,6 @@
-# Module 09: Feature Importance, Explainability, and Interpretability
+# Lesson 09: Feature Importance, Explainability, and Interpretability
 
-In this module, we explore **how and why** NLP models make predictions. We build on previous modules (sparse/dense representations, transformers) to demonstrate explainability techniques from traditional ML through transformers, using the ANPC press releases dataset.
+In this lesson, we explore **how and why** NLP models make predictions. We build on previous lessons (sparse/dense representations, transformers) to demonstrate explainability techniques from traditional ML through transformers, using the ANPC press releases dataset.
 
 ## Objectives
 
@@ -20,16 +20,16 @@ In this module, we explore **how and why** NLP models make predictions. We build
     - `attention_viz.py`: Transformer attention visualization utilities.
     - `utils.py`: Shared utilities for classification tasks and model training.
 - `notebooks/`: Interactive walkthrough.
-    - `09_explainability_and_interpretability.py`: Comprehensive notebook covering all techniques.
+    - `01_explainability_and_interpretability.py`: Comprehensive notebook covering all techniques.
 - `tests/`: Unit tests for explainability utilities.
 
 ## How to use
 
 1. Generate the notebook from the JupyText script:
    ```bash
-   uv run jupytext --update --to ipynb notebooks/09_explainability_and_interpretability.py
+   uv run jupytext --update --to ipynb notebooks/01_explainability_and_interpretability.py
    ```
-2. Explore `notebooks/09_explainability_and_interpretability.ipynb` to see the results.
+2. Explore `notebooks/01_explainability_and_interpretability.ipynb` to see the results.
 3. Run the unit tests:
    ```bash
    uv run pytest tests/
@@ -66,4 +66,4 @@ In this module, we explore **how and why** NLP models make predictions. We build
 - **Comparative Analysis**: Side-by-side method comparisons
 
 > [!NOTE]
-> **Data Grounding**: All observations and insights in this module are derived from actual execution on the ANPC dataset. No hallucinated examples or statistics.
+> **Data Grounding**: All observations and insights in this lesson are derived from actual execution on the ANPC dataset. No hallucinated examples or statistics.

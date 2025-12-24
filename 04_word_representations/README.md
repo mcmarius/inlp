@@ -1,6 +1,6 @@
-# Module 04: Word Representations (Sparse & Dense)
+# Lesson 04: Word Representations (Sparse & Dense)
 
-In this module, we explore sparse word representations using the ANPC press releases dataset. We focus on refining these representations with domain-specific stopwords and applying them to advanced NLP tasks.
+In this lesson, we explore sparse word representations using the ANPC press releases dataset. We focus on refining these representations with domain-specific stopwords and applying them to advanced NLP tasks.
 
 ## Objectives
 
@@ -33,13 +33,13 @@ In this module, we explore sparse word representations using the ANPC press rele
 
 ## How to use
 
-1. Generate the notebook from the JupyText script:
+1. Generate the notebooks from the JupyText script:
    ```bash
-   uv run jupytext --update --to ipynb notebooks/04_sparse_representations.py
-   uv run jupytext --update --to ipynb notebooks/05_dense_representations.py
-   uv run jupytext --update --to ipynb notebooks/06_contextual_representations.py
+   uv run jupytext --update --to ipynb notebooks/01_sparse_representations.py
+   uv run jupytext --update --to ipynb notebooks/02_dense_representations.py
+   uv run jupytext --update --to ipynb notebooks/03_contextual_representations.py
    ```
-2. Explore `notebooks/04_sparse_representations.ipynb` to see the results.
+2. Explore `notebooks/01_sparse_representations.ipynb` to see the results.
 3. Run the unit tests:
    ```bash
    uv run pytest tests/

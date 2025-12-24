@@ -1,5 +1,5 @@
 [project]
-name = "09_explainability"
+name = "08_explainability"
 version = "0.1.0"
 description = "Feature Importance, Explainability, and Interpretability module for Romanian NLP"
 dependencies = [

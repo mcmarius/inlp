@@ -13,7 +13,7 @@
 # ---
 
 # %% [markdown]
-# # Module 06: Transformers Applications
+# # Lesson 06: Transformers Applications
 #
 # In Lab 4, we introduced Word Embeddings (Static & Contextual).
 # In this lab, we dive into **Transformers** and their applications beyond just embeddings.

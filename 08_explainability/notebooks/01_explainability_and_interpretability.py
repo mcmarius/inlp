@@ -13,9 +13,9 @@
 # ---
 
 # %% [markdown]
-# # Module 09: Feature Importance, Explainability, and Interpretability
+# # Lesson 09: Feature Importance, Explainability, and Interpretability
 #
-# In this module, we explore **how and why** NLP models make predictions. We'll apply explainability techniques from traditional ML through transformers using the ANPC press releases dataset.
+# In this lesson, we explore **how and why** NLP models make predictions. We'll apply explainability techniques from traditional ML through transformers using the ANPC press releases dataset.
 #
 # We will cover:
 # 1. **Traditional ML Feature Importance**: Logistic Regression coefficients and Random Forest importance

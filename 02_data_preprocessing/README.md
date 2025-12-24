@@ -1,11 +1,11 @@
-# Module 02: Data Preprocessing
+# Lesson 02: Data Preprocessing
 
-This module focuses on cleaning, normalizing, and structuring the raw data collected in [Module 01](../01_data_collection) for downstream NLP tasks.
+This lesson focuses on cleaning, normalizing, and structuring the raw data collected in [Lesson 01](../01_data_collection) for downstream NLP tasks.
 
 ## Objectives
 
 1.  **Text Cleaning**:
-    *   Remove residual HTML tags/noise (not actually needed for this dataset, but see the TODOs in the previous module).
+    *   Remove residual HTML tags/noise (not actually needed for this dataset, but see the TODOs in the previous lesson).
     *   Handle special characters and whitespace.
     *   Normalize Romanian diacritics (e.g., ensuring consistent use of `ș` and `ț` instead of `ş` and `ţ`).
 2.  **Date Normalization**:
@@ -19,7 +19,7 @@ This module focuses on cleaning, normalizing, and structuring the raw data colle
 
 ## Data Cleaning Possibilities
 
-Beyond the basic cleaning implemented in this module, other common NLP preprocessing steps for Romanian include:
+Beyond the basic cleaning implemented in this lesson, other common NLP preprocessing steps for Romanian include:
 
 *   **URL and Email Removal**: Strip hyperlinks and email addresses using regex.
 *   **Social Media Cleanup**: Remove handles (@user), hashtags (#topic), and emojis if they don't add semantic value.
@@ -57,14 +57,14 @@ uv run python -m preprocessing.process_dataset
 Generate the notebook:
 
 ```bash
-uv run jupytext --update --to ipynb notebooks/02_preprocessing.py
+uv run jupytext --update --to ipynb notebooks/01_preprocessing.py
 ```
 
 ## Data Flow
 
 ```mermaid
 graph LR
-    A[01_data_collection/data/processed/articles_anpc.json] --> B[Preprocessing Module]
+    A[01_data_collection/data/processed/articles_anpc.json] --> B[Preprocessing Lesson]
     B --> C[02_data_preprocessing/data/processed/articles_anpc_preprocessed.json]
 ```
 

@@ -1,6 +1,6 @@
-# Module 03: Exploratory Data Analysis & Topic Modeling
+# Lesson 03: Exploratory Data Analysis & Topic Modeling
 
-This module focuses on exploring the ANPC press releases dataset and extracting insights through temporal analysis, topic modeling, and clustering.
+This lesson focuses on exploring the ANPC press releases dataset and extracting insights through temporal analysis, topic modeling, and clustering.
 
 ## Objectives
 
@@ -16,7 +16,7 @@ This module focuses on exploring the ANPC press releases dataset and extracting 
 uv sync --all-extras
 
 # Generate the notebook
-uv run jupytext --update --to ipynb notebooks/03_eda_anpc.py
+uv run jupytext --update --to ipynb notebooks/01_eda_anpc.py
 ```
 
 ## Structure

@@ -14,7 +14,7 @@
 # ---
 
 # %% [markdown]
-# # Module 01: Data Collection - Scraping ANPC Press Releases
+# # Lesson 01: Data Collection - Scraping ANPC Press Releases
 # 
 # In this notebook, we'll learn how to build a web scraper to collect a dataset
 # of Romanian text for NLP analysis. We'll scrape press releases from ANPC 
@@ -269,9 +269,9 @@ reprocess_saved_html()
 # 
 # With our dataset collected, we can proceed to:
 # 
-# 1. **Module 02: Preprocessing** - Clean and normalize the text
-# 2. **Module 03: EDA** - Explore patterns in the data
-# 3. **Module 04+**: Build NLP models
+# 1. **Lesson 02: Preprocessing** - Clean and normalize the text
+# 2. **Lesson 03: EDA** - Explore patterns in the data
+# 3. **Lesson 04+**: Build NLP models
 # 
 # ### Exercises
 # 

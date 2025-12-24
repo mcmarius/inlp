@@ -1,5 +1,5 @@
 # %% [markdown]
-# # Module 02: Data Preprocessing
+# # Lesson 02: Data Preprocessing
 # 
 # This notebook demonstrates the preprocessing steps for Romanian text, including cleaning, date normalization, and a comparison of different NLP pipelines.
 

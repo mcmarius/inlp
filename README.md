@@ -91,7 +91,7 @@ In [`06_transformers`](06_transformers) we explore transformer-based models and 
 
 ### 8. Feature importance, explainability, interpretability
 
-In [`09_explainability`](09_explainability) we explore how and why NLP models make predictions.
+In [`08_explainability`](08_explainability) we explore how and why NLP models make predictions.
 
 #### Traditional ML Feature Importance
 - Logistic Regression coefficients for direct interpretation

@@ -12,7 +12,7 @@
 # ---
 
 # %% [markdown]
-# # Module 07: Morphological Analysis and WordNet
+# # Lesson 07: Morphological Analysis and WordNet
 #
 # In this lab, we explore the **morphological** and **semantic** structure of Romanian text using the ANPC press releases dataset.
 #
