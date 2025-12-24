@@ -4,7 +4,8 @@
 
 We use [JupyText](https://jupytext.readthedocs.io/en/latest/) to write our notebooks in `.py` files for better version control, which are then converted to `.ipynb` files.
 
-### Building a dataset
+
+### 1. Building a dataset
 
 In [`01_data_collection`](01_data_collection) we will build a dataset from scratch. This directory will contain scripts for more datasets in the future.
 
@@ -16,7 +17,8 @@ The ANPC website uses a custom script to hydrate the page, which requires a JS r
 
 We use [Playwright](https://playwright.dev/) to render each page and extract the HTML.
 
-### Data preprocessing
+
+### 2. Data preprocessing
 
 In [`02_data_preprocessing`](02_data_preprocessing) we will preprocess the dataset.
 
@@ -24,11 +26,13 @@ In [`02_data_preprocessing`](02_data_preprocessing) we will preprocess the datas
 
 This dataset is fairly clean. We normalize diacritics, normalize dates, and tokenize the text.
 
-### Exploratory data analysis
+
+### 3. Exploratory data analysis
 
 In [`03_exploratory_data_analysis`](03_exploratory_data_analysis) we explore the dataset through temporal analysis, topic modeling, and clustering.
 
-### Word representations
+
+### 4. Word representations
 
 In [`04_word_representations`](04_word_representations) we explore different word representations.
 
@@ -45,7 +49,8 @@ We apply these to the ANPC dataset for:
 - static: word2vec, glove, fasttext
 - contextual: transformers
 
-### Morphological analysis, WordNet
+
+### 5. Morphological analysis, WordNet
 
 In [`05_morphological_analysis`](05_morphological_analysis) we explore the morphological and semantic structure of Romanian text.
 
@@ -62,7 +67,8 @@ In [`05_morphological_analysis`](05_morphological_analysis) we explore the morph
 - Semantic relations using RoWordNet
 - Hypernyms, hyponyms, and synonyms for consumer protection terms
 
-### Transformers Applications
+
+### 6. Transformers Applications
 
 In [`06_transformers`](06_transformers) we explore transformer-based models and their practical applications.
 
@@ -79,6 +85,35 @@ In [`06_transformers`](06_transformers) we explore transformer-based models and 
 - Stopword-filtered topics for meaningful domain term discovery
 - Temporal topic analysis to track themes over time
 
-### LLMs
 
-### Feature importance, explainability, interpretability
+### 7. LLMs
+
+
+### 8. Feature importance, explainability, interpretability
+
+In [`09_explainability`](09_explainability) we explore how and why NLP models make predictions.
+
+#### Traditional ML Feature Importance
+- Logistic Regression coefficients for direct interpretation
+- Random Forest Gini importance
+- Comparative analysis across methods
+
+#### LIME (Local Interpretable Model-agnostic Explanations)
+- Local explanations for individual predictions
+- Model-agnostic approach working with any classifier
+- Text-specific perturbation strategies
+
+#### SHAP (SHapley Additive exPlanations)
+- Game-theoretic feature attribution
+- Waterfall, summary, and force plot visualizations
+- Consistent and locally accurate explanations
+
+#### Transformer Attention Visualization
+- Self-attention mechanism analysis
+- Multi-head and multi-layer attention patterns
+- Identifying important tokens based on attention scores
+
+#### Comparative Analysis
+- Cross-method validation of feature importance
+- Understanding when different methods agree/disagree
+- Practical guidelines for choosing explainability techniques

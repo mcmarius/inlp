@@ -1,0 +1,23 @@
+[project]
+name = "09_explainability"
+version = "0.1.0"
+description = "Feature Importance, Explainability, and Interpretability module for Romanian NLP"
+dependencies = [
+    "pandas",
+    "scikit-learn",
+    "matplotlib",
+    "seaborn",
+    "numpy",
+    "lime",
+    "shap",
+    "transformers",
+    "torch",
+    "bertviz",
+    "jupytext",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[dependency-groups]
+dev = ["pytest"]
