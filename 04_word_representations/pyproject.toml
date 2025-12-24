@@ -12,6 +12,9 @@ dependencies = [
     "gensim",
     "umap-learn",
     "adjustText",
+    "transformers",
+    "torch",
+    "requests",
 ]
 
 [tool.pytest.ini_options]
