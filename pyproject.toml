@@ -13,10 +13,10 @@ dev = [
 ]
 
 [tool.uv.workspace]
-members = ["01_data_collection", "02_data_preprocessing", "03_exploratory_data_analysis", "04_word_representations"]
+members = ["01_data_collection", "02_data_preprocessing", "03_exploratory_data_analysis", "04_word_representations", "06_transformers"]
 
 [tool.pytest.ini_options]
-pythonpath = ["01_data_collection", "02_data_preprocessing", "03_exploratory_data_analysis", "04_word_representations"]
+pythonpath = ["01_data_collection", "02_data_preprocessing", "03_exploratory_data_analysis", "04_word_representations", "06_transformers"]
 addopts = "--cov --cov-report=term-missing"
 
 [tool.coverage.run]

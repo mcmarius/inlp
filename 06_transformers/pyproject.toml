@@ -1,0 +1,28 @@
+[project]
+name = "06_transformers"
+version = "0.1.0"
+description = "Transformers applications module for Romanian NLP"
+dependencies = [
+    "pandas",
+    "scikit-learn",
+    "matplotlib",
+    "seaborn",
+    "transformers",
+    "torch",
+    "sentence-transformers",
+    # "bertopic",
+    "rouge-score",
+    "datasets>=2.20.0",
+    "evaluate",
+    "networkx",
+    "accelerate",
+    "sentencepiece",
+    "protobuf",
+    "bertopic>=0.17.4",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[dependency-groups]
+dev = ["pytest"]

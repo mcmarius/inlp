@@ -62,7 +62,23 @@ In [`05_morphological_analysis`](05_morphological_analysis) we explore the morph
 - Semantic relations using RoWordNet
 - Hypernyms, hyponyms, and synonyms for consumer protection terms
 
-### Transformers, BerTopic, SBert
-### LLMs
-### Feature importance, explainability
+### Transformers Applications
 
+In [`06_transformers`](06_transformers) we explore transformer-based models and their practical applications.
+
+#### Text Summarization
+- **Extractive**: Using DistilBERT with TextRank/PageRank for sentence selection
+- **Abstractive**: Fine-tuning T5 for title generation (with documented limitations on small datasets)
+
+#### Semantic Search
+- Building Sentence Transformers (SBERT) for semantic similarity
+- Duplicate detection and related article recommendation
+
+#### Topic Modeling with BERTopic
+- Advanced topic modeling using transformer embeddings
+- Stopword-filtered topics for meaningful domain term discovery
+- Temporal topic analysis to track themes over time
+
+### LLMs
+
+### Feature importance, explainability, interpretability
