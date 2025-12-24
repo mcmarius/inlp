@@ -46,6 +46,23 @@ We apply these to the ANPC dataset for:
 - contextual: transformers
 
 ### Morphological analysis, WordNet
+
+In [`05_morphological_analysis`](05_morphological_analysis) we explore the morphological and semantic structure of Romanian text.
+
+#### POS Tagging and NER
+- Part-of-speech distribution analysis
+- Named entity recognition for organizations, monetary values, and locations
+- Verb analysis revealing bureaucratic language patterns
+
+#### Dependency Parsing
+- Syntactic structure visualization
+- Sentence complexity analysis
+
+#### WordNet
+- Semantic relations using RoWordNet
+- Hypernyms, hyponyms, and synonyms for consumer protection terms
+
 ### Transformers, BerTopic, SBert
 ### LLMs
 ### Feature importance, explainability
+
