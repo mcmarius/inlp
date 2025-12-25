@@ -13,6 +13,8 @@ dependencies = [
     "seaborn>=0.13.0",
     "adjustText>=1.1.1",
     "wordcloud>=1.9.3",
+    "ro_core_news_sm @ https://github.com/explosion/spacy-models/releases/download/ro_core_news_sm-3.8.0/ro_core_news_sm-3.8.0-py3-none-any.whl",
+    "ipython>=9.8.0",
 ]
 
 [project.optional-dependencies]

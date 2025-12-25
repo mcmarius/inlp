@@ -13,9 +13,11 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "adjusttext" },
+    { name = "ipython" },
     { name = "matplotlib" },
     { name = "nltk" },
     { name = "pandas" },
+    { name = "ro-core-news-sm" },
     { name = "rowordnet" },
     { name = "seaborn" },
     { name = "spacy" },
@@ -33,6 +35,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "adjusttext", specifier = ">=1.1.1" },
+    { name = "ipython", specifier = ">=9.8.0" },
     { name = "jupyter", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "jupytext", marker = "extra == 'dev'", specifier = ">=1.15.0" },
     { name = "matplotlib", specifier = ">=3.8.0" },
@@ -40,6 +43,7 @@ requires-dist = [
     { name = "pandas", specifier = ">=2.1.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.4.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.1.0" },
+    { name = "ro-core-news-sm", url = "https://github.com/explosion/spacy-models/releases/download/ro_core_news_sm-3.8.0/ro_core_news_sm-3.8.0-py3-none-any.whl" },
     { name = "rowordnet", specifier = ">=0.5.0" },
     { name = "seaborn", specifier = ">=0.13.0" },
     { name = "spacy", specifier = ">=3.7.0" },
@@ -2719,6 +2723,14 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/2c/06/37c1a5557acf449e8e406a830a05bf885ac47d33270aec454ef78675008d/rfc3987_syntax-1.1.0.tar.gz", hash = "sha256:717a62cbf33cffdd16dfa3a497d81ce48a660ea691b1ddd7be710c22f00b4a0d", size = 14239, upload-time = "2025-07-18T01:05:05.015Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/7e/71/44ce230e1b7fadd372515a97e32a83011f906ddded8d03e3c6aafbdedbb7/rfc3987_syntax-1.1.0-py3-none-any.whl", hash = "sha256:6c3d97604e4c5ce9f714898e05401a0445a641cfa276432b0a648c80856f6a3f", size = 8046, upload-time = "2025-07-18T01:05:03.843Z" },
+]
+
+[[package]]
+name = "ro-core-news-sm"
+version = "3.8.0"
+source = { url = "https://github.com/explosion/spacy-models/releases/download/ro_core_news_sm-3.8.0/ro_core_news_sm-3.8.0-py3-none-any.whl" }
+wheels = [
+    { url = "https://github.com/explosion/spacy-models/releases/download/ro_core_news_sm-3.8.0/ro_core_news_sm-3.8.0-py3-none-any.whl", hash = "sha256:3cebfba2437131efe95345adcc7ea2131e4463915652df9099c577e618460cd9" },
 ]
 
 [[package]]
