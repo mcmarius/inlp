@@ -10,10 +10,12 @@ from pathlib import Path
 
 # Add the parent directory to path for imports
 sys.path.insert(0, str(Path.cwd().parent))
+sys.path.append(str(Path.cwd().parent.parent))
 
 # %%
 from preprocessing.cleaner import clean_text, parse_romanian_date
 from preprocessing.nlp_pipeline import RomanianNLP, get_romanian_stopwords
+from notebook_utils import path_resolver
 
 # %% [markdown]
 # ## 1. Text Cleaning and Date Normalization
@@ -89,8 +91,8 @@ process_dataset()
 
 # %%
 # Look at the processed result
-OUTPUT_FILE = Path.cwd().parent / "data" / "processed" / "articles_anpc_preprocessed.json"
-with open(OUTPUT_FILE, "r", encoding="utf-8") as f:
+OUTPUT_FILE = Path("..") / "data" / "processed" / "articles_anpc_preprocessed.json"
+with open(path_resolver(OUTPUT_FILE), "r", encoding="utf-8") as f:
     processed_data = json.load(f)
     print("\nProcessed Article Example:")
     # Show the new fields added during preprocessing

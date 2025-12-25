@@ -37,11 +37,13 @@ import warnings
 from pathlib import Path
 
 # Suppress warnings for cleaner output
-warnings.filterwarnings('ignore')
+# warnings.filterwarnings('ignore')
 
 # Add module to path
 sys.path.append(str(Path.cwd().parent))
+sys.path.append(str(Path.cwd().parent.parent))
 
+from notebook_utils import path_resolver
 # Imports from our explainability module
 from explainability.utils import (
     prepare_classification_task,
@@ -110,8 +112,8 @@ print("All imports successful!")
 
 # %%
 # Load preprocessed data
-data_path = "../../02_data_preprocessing/data/processed/articles_anpc_preprocessed.json"
-df = pd.read_json(data_path)
+data_path = "../02_data_preprocessing/data/processed/articles_anpc_preprocessed.json"
+df = pd.read_json(path_resolver(data_path, external=True))
 print(f"Loaded {len(df)} articles.")
 
 # Prepare classification task

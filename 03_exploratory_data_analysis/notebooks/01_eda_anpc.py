@@ -24,14 +24,20 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from pathlib import Path
+
+from IPython.core.display_functions import display
 from wordcloud import WordCloud
 
 # Setup paths
-DATA_PATH = Path("../../02_data_preprocessing/data/processed/articles_anpc_preprocessed.json")
+DATA_PATH = Path("../02_data_preprocessing/data/processed/articles_anpc_preprocessed.json")
 
 import sys
 # Add parent directory to access 'analysis' and adjacent module to access 'preprocessing'
 sys.path.append(str(Path.cwd().parent))
+sys.path.append(str(Path.cwd().parent.parent))
+from notebook_utils import path_resolver
+
+sys.path.append(str(Path.cwd().parent / "02_data_preprocessing"))
 sys.path.append(str(Path.cwd().parent.parent / "02_data_preprocessing"))
 
 from preprocessing.nlp_pipeline import get_romanian_stopwords
@@ -52,7 +58,7 @@ custom_stopwords = get_romanian_stopwords() + [
 # ## 1. Loading the Data
 
 # %%
-with open(DATA_PATH, "r", encoding="utf-8") as f:
+with open(path_resolver(DATA_PATH, external=True), "r", encoding="utf-8") as f:
     data = json.load(f)
 df = pd.DataFrame(data)
 print(f"Loaded {len(df)} articles.")

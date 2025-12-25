@@ -37,6 +37,9 @@ import sys
 
 # Add parent directory to path for imports
 sys.path.append(str(Path.cwd().parent))
+sys.path.append(str(Path.cwd().parent.parent))
+
+from notebook_utils import path_resolver
 from morphology.utils import (
     load_spacy_model,
     extract_pos_stats,
@@ -51,8 +54,8 @@ plt.rcParams['figure.figsize'] = (12, 6)
 # ## Load Data
 
 # %%
-data_path = Path("../../01_data_collection/data/processed/articles_anpc.json")
-with open(data_path, "r", encoding="utf-8") as f:
+data_path = Path("../01_data_collection/data/processed/articles_anpc.json")
+with open(path_resolver(data_path, external=True), "r", encoding="utf-8") as f:
     articles = json.load(f)
 
 print(f"Loaded {len(articles)} articles")

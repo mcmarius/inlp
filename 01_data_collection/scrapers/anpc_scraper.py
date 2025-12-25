@@ -15,9 +15,14 @@ import time
 from pathlib import Path
 from typing import Optional
 from urllib.parse import urlparse
+from concurrent.futures import ThreadPoolExecutor
+
 
 from playwright.async_api import async_playwright, Page, TimeoutError as PlaywrightTimeout
 from bs4 import BeautifulSoup
+
+# sync/async hacks
+_executor = ThreadPoolExecutor(max_workers=4)
 
 # Configure logging
 logging.basicConfig(
@@ -442,18 +447,18 @@ def reprocess_saved_html() -> list[dict]:
     return list(existing_articles.values())
 
 
+def _run_coro_in_thread(coro):
+    def _target():
+        return asyncio.run(coro)
+    return _executor.submit(_target).result()
+
+
 def scrape_page(page_num: int, max_articles: Optional[int] = None) -> list[dict]:
     """
     Synchronous wrapper to scrape a single index page.
     
     Useful for testing or quick scrapes from the command line.
     """
-    try:
-        # Check if there is an event loop already running (Jupyter/IPython)
-        loop = asyncio.get_running_loop()
-    except RuntimeError:
-        loop = None
-
     async def _scrape():
         async with async_playwright() as p:
             browser = await p.chromium.launch(headless=True)
@@ -477,10 +482,7 @@ def scrape_page(page_num: int, max_articles: Optional[int] = None) -> list[dict]
             finally:
                 await browser.close()
 
-    if loop and loop.is_running():
-        return loop.create_task(_scrape())
-    else:
-        return asyncio.run(_scrape())
+    return _run_coro_in_thread(_scrape())
 
 
 if __name__ == "__main__":

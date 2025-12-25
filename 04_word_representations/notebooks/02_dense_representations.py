@@ -37,10 +37,13 @@ from sklearn.manifold import TSNE
 import umap
 from adjustText import adjust_text
 from scipy.linalg import orthogonal_procrustes
+from pathlib import Path
 
 # Add the module to path for imports to work
-sys.path.append(os.path.abspath('..'))
+sys.path.append(str(Path.cwd().parent))
+sys.path.append(str(Path.cwd().parent.parent))
 
+from notebook_utils import path_resolver
 from representations.embeddings import EmbeddingWrapper, get_word_vectors
 from utils import get_improved_stopwords
 
@@ -89,8 +92,8 @@ plt.rcParams['figure.figsize'] = (12, 8)
 # To get high-quality representations, we use **lemmas** and filter by **Part-of-Speech (POS)** tags, keeping only content-bearing words (Nouns, Verbs, Adjectives, Proper Nouns).
 
 # %%
-data_path = "../../02_data_preprocessing/data/processed/articles_anpc_preprocessed.json"
-df = pd.read_json(data_path)
+data_path = "../02_data_preprocessing/data/processed/articles_anpc_preprocessed.json"
+df = pd.read_json(path_resolver(data_path, external=True))
 print(f"Loaded {len(df)} articles.")
 
 # Prepare sentences using content_tokens and POS filtering

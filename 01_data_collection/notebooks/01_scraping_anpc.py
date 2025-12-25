@@ -12,7 +12,6 @@
 #     language: python
 #     name: python3
 # ---
-
 # %% [markdown]
 # # Lesson 01: Data Collection - Scraping ANPC Press Releases
 # 
@@ -28,7 +27,6 @@
 # 3. Implement respectful scraping practices (rate limiting, user agents)
 # 4. Handle errors gracefully with retry logic
 # 5. Structure scraped data for NLP tasks
-
 # %% [markdown]
 # ## 1. Why Web Scraping for NLP?
 # 
@@ -68,6 +66,9 @@ from pathlib import Path
 
 # Add the parent directory to path for imports
 sys.path.insert(0, str(Path.cwd().parent))
+sys.path.append(str(Path.cwd().parent.parent))
+
+from notebook_utils import path_resolver
 
 print(f"Python version: {sys.version}")
 print(f"Working directory: {Path.cwd()}")
@@ -79,6 +80,27 @@ try:
     print("✅ Playwright is installed")
 except ImportError:
     print("❌ Playwright not found. Run: uv run playwright install chromium")
+
+# %%
+# Notebook utilities
+import asyncio
+import os
+from concurrent.futures import ThreadPoolExecutor
+
+# sync/async hacks
+_executor = ThreadPoolExecutor(max_workers=4)
+
+def _run_coro_in_thread(coro):
+    def _target():
+        return asyncio.run(coro)
+    return _executor.submit(_target).result()
+
+def async_wrapper(func, *args, **kwargs):
+    async def wrapper(*args, **kwargs):
+        return await func(*args, **kwargs)
+
+    return _run_coro_in_thread(wrapper(*args, **kwargs))
+
 
 # %% [markdown]
 # ## 3. Understanding the Target Website
@@ -156,7 +178,8 @@ print(f"Existing articles: {len(existing)}")
 # Scrape just 2 articles from page 1 (for demonstration)
 # This will take about 5-10 seconds
 print("Scraping 2 articles from page 1...")
-articles = await scrapers.anpc_scraper.scrape_page(page_num=1, max_articles=2)
+
+articles = scrapers.anpc_scraper.scrape_page(page_num=1, max_articles=2)
 print(f"\nScraped {len(articles)} articles")
 
 # %%
@@ -174,12 +197,21 @@ print(article['content'] if article['content'] else "(no content)")
 # %% [markdown]
 # ## 6. Exploring the Scraped Data
 
+
+# %%
+# To scrape everything (takes ~30 minutes):
+from scrapers.anpc_scraper import scrape_articles
+
+articles = async_wrapper(scrape_articles)
+print(f"Total articles: {len(articles)}")
+
+
 # %%
 import json
 from pathlib import Path
 
 # Load all scraped articles
-data_file = Path("../data/processed/articles_anpc.json")
+data_file = path_resolver("../data/processed/articles_anpc.json")
 with open(data_file, "r", encoding="utf-8") as f:
     all_articles = json.load(f)
 print(f"Total articles: {len(all_articles)}")
@@ -222,7 +254,7 @@ plt.show()
 
 # %%
 # Check raw HTML files
-raw_html_dir = Path("../data/raw_html")
+raw_html_dir = path_resolver("../data/raw_html")
 html_files = list(raw_html_dir.glob("*.html"))
 print(f"Raw HTML files: {len(html_files)}")
 
@@ -248,16 +280,6 @@ print(f"Preview: {content[:200]}...")
 # 
 # **Recommendation**: Use Playwright for new projects.
 
-# %%
-# To scrape everything (takes ~30 minutes):
-from scrapers.anpc_scraper import scrape_articles
-
-async def full_scrape():
-    articles = await scrape_articles()
-    print(f"Total articles: {len(articles)}")
-
-# asyncio.run(full_scrape())
-await full_scrape()
 
 # %%
 # To reprocess already downloaded HTML files:

@@ -57,6 +57,9 @@ import evaluate
 
 # Add parent to path for utils
 sys.path.append(str(Path.cwd().parent))
+sys.path.append(str(Path.cwd().parent.parent))
+
+from notebook_utils import path_resolver
 from utils import get_improved_stopwords
 
 # Aesthetic setup
@@ -88,13 +91,9 @@ print(f"Using device: {device}")
 # We load our ANPC articles. We will use the 'title' and 'content' fields.
 
 # %%
-DATA_FILE = Path("../../02_data_preprocessing/data/processed/articles_anpc_preprocessed.json")
+DATA_FILE = Path("../02_data_preprocessing/data/processed/articles_anpc_preprocessed.json")
 
-if not DATA_FILE.exists():
-    print(f"Error: Data file not found at {DATA_FILE.absolute()}")
-    sys.exit(1)
-
-df = pd.read_json(DATA_FILE)
+df = pd.read_json(path_resolver(DATA_FILE, external=True))
 # Filter out empty titles or content
 df = df.dropna(subset=['title', 'content'])
 df = df[df['content'].str.len() > 100] # Keep substantial articles

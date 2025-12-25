@@ -37,9 +37,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 import sys
+from pathlib import Path
 
 # Add the module to path for imports to work
-sys.path.append(os.path.abspath('..'))
+sys.path.append(str(Path.cwd().parent))
+sys.path.append(str(Path.cwd().parent.parent))
+from notebook_utils import path_resolver
 
 from representations.bow import BoWRepresentation
 from representations.tfidf import TFIDFRepresentation
@@ -53,8 +56,8 @@ from tasks.seasonal_analysis import SeasonalAnalyzer
 # We use the preprocessed ANPC data from Lesson 02.
 
 # %%
-data_path = "../../02_data_preprocessing/data/processed/articles_anpc_preprocessed.json"
-df = pd.read_json(data_path)
+data_path = "../02_data_preprocessing/data/processed/articles_anpc_preprocessed.json"
+df = pd.read_json(path_resolver(data_path, external=True))
 print(f"Loaded {len(df)} articles.")
 
 # %% [markdown]

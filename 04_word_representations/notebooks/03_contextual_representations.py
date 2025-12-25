@@ -45,6 +45,9 @@ import requests
 # Add the parent directory to path for imports
 # Standard way in this repo: assumes CWD is the notebooks/ directory
 sys.path.append(str(Path.cwd().parent))
+sys.path.append(str(Path.cwd().parent.parent))
+
+from notebook_utils import path_resolver
 from utils import get_improved_stopwords
 
 # Set aesthetic style
@@ -190,16 +193,9 @@ else:
 
 # %%
 # Load data - Using established relative paths
-DATA_FILE = Path("../../02_data_preprocessing/data/processed/articles_anpc_preprocessed.json")
+DATA_FILE = Path("../02_data_preprocessing/data/processed/articles_anpc_preprocessed.json")
 
-if not DATA_FILE.exists():
-    # If not found, try to locate it relative to project root
-    # but the convention seems to be running from notebooks/
-    print(f"Error: Data file not found at {DATA_FILE.absolute()}")
-    print("Ensure you are running this from the notebooks/ directory.")
-    sys.exit(1)
-
-df = pd.read_json(DATA_FILE)
+df = pd.read_json(path_resolver(DATA_FILE, external=True))
 
 # Filter for relevant articles to get diverse contexts
 # 'control' is frequent enough if we look closely
