@@ -5,6 +5,13 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      run_notebooks:
+        description: Run notebooks
+        required: false
+        default: true
+        type: boolean
 
 jobs:
   Test:
@@ -46,3 +53,45 @@ jobs:
         uv run python -c "import stanza; stanza.download('ro')"
         uv run python -c "import spacy; spacy.cli.download('ro_core_news_sm')"
         uv run pytest
+
+    - name: Cache scraper data
+      id: scraper-data-cache
+      uses: actions/cache/restore@v4
+      if: ${{ inputs.run_notebooks }}
+      with:
+        key: ${{ runner.os }}-scraper-data-${{ github.run_id }}
+        restore-keys: ${{ runner.os }}-scraper-data
+        path: |
+          01_data_collection/data
+          02_data_preprocessing/data
+
+    - name: Run all notebooks
+      if: ${{ inputs.run_notebooks }}
+      run: |
+        for dir in \
+          01_data_collection \
+          02_data_preprocessing \
+          03_exploratory_data_analysis \
+          04_word_representations \
+          05_morphological_analysis \
+          06_transformers \
+          08_explainability; do
+          cd ${dir}
+          echo "Changed directory to ${dir}"
+          for notebook in $(ls -1 notebooks/*.py); do
+            echo "Running notebook ${notebook}"
+            uv run python -m $(echo ${notebook//.py} | sed 's|/|.|')
+          done
+          cd ..
+        done
+        echo "Done running all notebooks"
+
+    - name: Save scraper data
+      id: scraper-data-save
+      uses: actions/cache/save@v4
+      if: ${{ always() && inputs.run_notebooks }}
+      with:
+        key: ${{ runner.os }}-scraper-data-${{ github.run_id }}
+        path: |
+          01_data_collection/data
+          02_data_preprocessing/data
