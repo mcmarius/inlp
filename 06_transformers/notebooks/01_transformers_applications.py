@@ -172,8 +172,8 @@ print(f"Extractive Summary (Top 1 sentence):\n{extractive_summary(sample_text, t
 train_df, val_df = train_test_split(df[['content', 'title']], test_size=0.1, random_state=42)
 
 # Use a tiny subset for lab demonstration speed
-train_df_tiny = train_df.iloc[:50] # Only 50 examples
-val_df_tiny = val_df.iloc[:10]
+train_df_tiny = train_df.iloc[:20] # Only 20 examples
+val_df_tiny = val_df.iloc[:5]
 
 MODEL_NAME_T5 = "dumitrescustefan/t5-v1_1-base-romanian"
 tokenizer_t5 = AutoTokenizer.from_pretrained(MODEL_NAME_T5)
@@ -246,7 +246,7 @@ training_args = Seq2SeqTrainingArguments(
     per_device_eval_batch_size=2,
     weight_decay=0.01,
     save_total_limit=1,
-    num_train_epochs=3, # Small epoch count for demo
+    num_train_epochs=1, # Small epoch count for demo
     predict_with_generate=True,
     logging_steps=5,
     use_cpu=not torch.cuda.is_available()
@@ -318,8 +318,8 @@ pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension
 sbert_model = SentenceTransformer(modules=[word_embedding_model, pooling_model], device=str(device))
 
 print("Encoding ANPC corpus for semantic search (this may take a moment)...")
-# Let's take a subset of ~200 top articles to save time
-df_subset = df.head(500).copy()
+# Let's take a subset to save time and memory
+df_subset = df.head(100).copy()
 embeddings_sbert = sbert_model.encode(df_subset['content'].tolist(), show_progress_bar=True)
 
 # %%
