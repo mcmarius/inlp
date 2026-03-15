@@ -112,12 +112,46 @@ author_id.plot_author_clusters(documents)
 
 # %% [markdown]
 # ### Stylistic Markers
-# Let's see which functional words define each style group.
+#
+# Our stylistic clustering reveals distinct "fingerprints" in how press releases are structured. 
+# While Cluster 0 might be more formal or template-driven, Cluster 2 might represent ad-hoc announcements with different connector word frequencies.
+#
+# **Key Findings**:
+# - The functional word **'de'** is the most significant stylistic marker ($p < 10^{-26}$), suggesting large variations in prepositional phrase density between groups.
+# - High-frequency markers like **'produs'**, **'anpc'**, and **'cu'** also show statistically significant differences ($p < 10^{-7}$), which may indicate different departmental authorship or template types.
 
 # %%
 markers = author_id.get_stylistic_markers(n_words=10)
 for i, words in enumerate(markers):
     print(f"Style Group {i}: {', '.join(words)}")
+
+# %% [markdown]
+# ### Cluster Document Samples
+# Let's examine actual documents from each cluster to see if we can identify qualitative differences in style or format.
+
+# %%
+# Add back the cluster labels to the original dataframe for sampling
+df['style_cluster'] = author_id.labels
+
+for i in range(author_id.n_clusters):
+    print(f"\n--- SAMPLE DOCUMENTS: Style Group {i} ---")
+    samples = df[df['style_cluster'] == i].sample(min(3, len(df[df['style_cluster'] == i])), random_state=42)
+    for idx, row in samples.iterrows():
+        print(f"ID: {row.get('id', idx)} | Title: {row['title'][:100]}...")
+        # Show first 200 chars of lemmatized content to see stopword patterns
+        print(f"Content (sample): {row['lemmatized_content'][:200]}...")
+        print("-" * 20)
+
+# %% [markdown]
+# ### Statistical Significance (Kruskal-Wallis)
+# We test whether the distribution of each stopword is significantly different across the style groups. 
+# A low p-value indicates that the word's frequency is a strong stylistic discriminator.
+
+# %%
+significance_df = author_id.test_significance(documents)
+# Show top 15 most significant stylistic markers
+print("Top 15 Significant Stylistic Markers (Stopwords):")
+print(significance_df.head(15))
 
 # %% [markdown]
 # ## 6. Task: Seasonal Issue Analysis
