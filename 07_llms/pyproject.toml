@@ -1,0 +1,26 @@
+[project]
+name = "07-llms"
+version = "0.1.0"
+description = "Module 07: Large Language Models - From Foundations to Local MoE execution"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.1.0",
+    "matplotlib>=3.8.0",
+    "seaborn>=0.13.0",
+    "jupytext>=1.15.0",
+    "jupyter>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.jupytext]
+formats = "notebooks///ipynb,notebooks///py:percent"
