@@ -2852,6 +2852,14 @@ name = "romanian-nlp-lab"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "01-data-collection" },
+    { name = "02-data-preprocessing" },
+    { name = "03-exploratory-data-analysis" },
+    { name = "04-word-representations" },
+    { name = "05-morphological-analysis" },
+    { name = "06-transformers" },
+    { name = "07-llms" },
+    { name = "08-explainability" },
     { name = "ipykernel" },
     { name = "pandas" },
     { name = "scikit-learn" },
@@ -2870,6 +2878,14 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "01-data-collection", virtual = "01_data_collection" },
+    { name = "02-data-preprocessing", virtual = "02_data_preprocessing" },
+    { name = "03-exploratory-data-analysis", virtual = "03_exploratory_data_analysis" },
+    { name = "04-word-representations", virtual = "04_word_representations" },
+    { name = "05-morphological-analysis", virtual = "05_morphological_analysis" },
+    { name = "06-transformers", virtual = "06_transformers" },
+    { name = "07-llms", virtual = "07_llms" },
+    { name = "08-explainability", virtual = "08_explainability" },
     { name = "ipykernel", specifier = ">=7.1.0" },
     { name = "pandas" },
     { name = "scikit-learn" },

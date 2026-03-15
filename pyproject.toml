@@ -9,6 +9,14 @@ dependencies = [
     "pandas",
     "scikit-learn",
     "statsmodels>=0.14.6",
+    "01-data-collection",
+    "02-data-preprocessing",
+    "03-exploratory-data-analysis",
+    "04_word_representations",
+    "05-morphological-analysis",
+    "06_transformers",
+    "07-llms",
+    "08_explainability",
 ]
 
 [dependency-groups]
@@ -32,8 +40,29 @@ members = [
     "08_explainability",
 ]
 
+[tool.uv.sources]
+01-data-collection = { workspace = true }
+02-data-preprocessing = { workspace = true }
+03-exploratory-data-analysis = { workspace = true }
+04_word_representations = { workspace = true }
+05-morphological-analysis = { workspace = true }
+06_transformers = { workspace = true }
+07-llms = { workspace = true }
+08_explainability = { workspace = true }
+
 [tool.pytest.ini_options]
+testpaths = [
+    "01_data_collection",
+    "02_data_preprocessing",
+    "03_exploratory_data_analysis",
+    "04_word_representations",
+    "05_morphological_analysis",
+    "06_transformers",
+    "07_llms",
+    "08_explainability",
+]
 pythonpath = [
+    ".",
     "01_data_collection",
     "02_data_preprocessing",
     "03_exploratory_data_analysis",

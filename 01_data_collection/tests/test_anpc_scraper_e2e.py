@@ -5,9 +5,9 @@ from scrapers import anpc_scraper
 
 # Constants for E2E tests
 # Article to find on the first index page
-EXPECTED_TOP_ARTICLE_URL = "https://anpc.ro/comandament-anpc-in-zonele-turistice/"
+EXPECTED_TOP_ARTICLE_URL = "https://anpc.ro/mesajul-presedintelui-anpc-cu-ocazia-zilei-mondiale-a-drepturilor-consumatorilor/"
 # Specific article page for content extraction test
-SPECIFIC_ARTICLE_URL = "https://anpc.ro/comandament-anpc-in-zonele-turistice/"
+SPECIFIC_ARTICLE_URL = "https://anpc.ro/mesajul-presedintelui-anpc-cu-ocazia-zilei-mondiale-a-drepturilor-consumatorilor/"
 
 @pytest.mark.asyncio
 async def test_index_page_e2e():
@@ -61,11 +61,11 @@ async def test_article_content_e2e():
         await browser.close()
         
         assert data["url"] == SPECIFIC_ARTICLE_URL
-        assert "Comandament ANPC" in data["title"]
+        assert "Mesajul Președintelui ANPC cu ocazia Zilei Mondiale a Drepturilor Consumatorilor" in data["title"]
         assert len(data["content"]) > 100
         assert data["date"] != ""
         assert data["time"] != ""
         
         # Specific check for the known article content to ensure extraction quality
-        assert "Autoritatea Națională pentru Protecția Consumatorilor" in data["content"]
-        assert "1,6 milioane de lei" in data["content"]
+        assert "Această zi reprezintă un moment de reflecție" in data["content"]
+        assert "Misiunea noastră este aceea de a apăra drepturile acestora" in data["content"]

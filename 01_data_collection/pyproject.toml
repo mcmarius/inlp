@@ -26,6 +26,7 @@ dev = [
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
+pythonpath = ["."]
 
 [tool.jupytext]
 formats = "notebooks///ipynb,notebooks///py:percent"
