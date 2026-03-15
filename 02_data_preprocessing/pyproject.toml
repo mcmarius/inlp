@@ -27,5 +27,8 @@ dev = [
 testpaths = ["tests"]
 pythonpath = ["."]
 
+[tool.setuptools.packages.find]
+include = ["preprocessing*"]
+
 [tool.jupytext]
 formats = "notebooks///ipynb,notebooks///py:percent"

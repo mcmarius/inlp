@@ -20,3 +20,12 @@ dependencies = [
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
+
+
+[tool.setuptools.packages.find]
+include = ["representations*"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]

@@ -21,6 +21,10 @@ dependencies = [
 testpaths = ["tests"]
 pythonpath = ["."]
 
+
+[tool.setuptools.packages.find]
+include = ["analysis*"]
+
 [dependency-groups]
 dev = [
     "pytest>=9.0.2",

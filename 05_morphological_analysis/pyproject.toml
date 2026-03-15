@@ -29,6 +29,9 @@ dev = [
 testpaths = ["tests"]
 pythonpath = ["."]
 
+[tool.setuptools.packages.find]
+include = ["morphology*"]
+
 [tool.jupytext]
 formats = "notebooks///ipynb,notebooks///py:percent"
 
