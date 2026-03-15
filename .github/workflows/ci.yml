@@ -95,3 +95,16 @@ jobs:
         path: |
           01_data_collection/data
           02_data_preprocessing/data
+
+    - name: Upload scraper data artifacts
+      if: ${{ always() && inputs.run_notebooks }}
+      uses: actions/upload-artifact@v6
+      with:
+        name: scraper-data
+        path: |
+          01_data_collection/data
+          02_data_preprocessing/data
+          !**/__pycache__
+        if-no-files-found: warn
+        retention-days: 90
+

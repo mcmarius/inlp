@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 # --- Configuration ---
 BASE_URL = "https://anpc.ro"
 INDEX_URL_TEMPLATE = "https://anpc.ro/category/comunicate-de-presa/bpage/{page}/"
-TOTAL_PAGES = 12
+TOTAL_PAGES = 13
 
 # Rate limiting
 REQUEST_DELAY_SECONDS = 1.0
