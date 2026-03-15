@@ -236,7 +236,7 @@ displacy.render(sample_doc, style="dep", jupyter=True, options={"distance": 120}
 # Let's explore semantic relations using **RoWordNet**. We'll look at hypernyms and synonyms for key consumer protection terms.
 
 # %%
-from rowordnet import RoWordNet
+import wn
 from morphology.utils import (
     get_synset_info,
     get_hypernym_chain,
@@ -247,20 +247,21 @@ from morphology.utils import (
     extract_antonyms,
 )
 
-wn = RoWordNet()
+# Initialize Romanian Wordnet
+ro_wn = wn.Wordnet('omw-ro:2.0')
 
 # Key terms from ANPC domain
 terms = ["amendă", "produs", "consumator", "comerciant"]
 
 for term in terms:
-    info = get_synset_info(wn, term)
+    info = get_synset_info(ro_wn, term)
     if info:
         print(f"\n--- {term.upper()} ---")
         print(f"Definition: {info['definition']}")
         print(f"Literals: {', '.join(info['literals'])}")
         
         # Hypernyms (more general concepts)
-        hypernyms = get_hypernym_chain(wn, term, max_depth=5)
+        hypernyms = get_hypernym_chain(ro_wn, term, max_depth=5)
         if hypernyms:
             print(f"Hypernym chain: {' → '.join(hypernyms)}")
 
@@ -272,7 +273,7 @@ for term in terms:
 # %%
 # Get all relations of "amendă"
 print("\nRelations for 'amendă':")
-relations = get_all_relations(wn, "amendă")
+relations = get_all_relations(ro_wn, "amendă")
 
 print(f"\nOutbound relations ({len(relations['outbound'])}):")
 for rel in relations['outbound'][:5]:
@@ -289,13 +290,13 @@ for rel in relations['inbound'][:5]:
 
 # %%
 # Find shortest path between "consumator" and "comerciant"
-path = find_semantic_path(wn, "consumator", "comerciant")
+path = find_semantic_path(ro_wn, "consumator", "comerciant")
 if path:
     print("\nShortest path from 'consumator' to 'comerciant':")
     print(" → ".join(path))
 
 # Find lowest common ancestor
-ancestor = find_common_ancestor(wn, "consumator", "comerciant")
+ancestor = find_common_ancestor(ro_wn, "consumator", "comerciant")
 if ancestor:
     print(f"\nLowest common ancestor: {ancestor}")
 
@@ -307,7 +308,7 @@ if ancestor:
 # %%
 # Extract synonyms from consumer protection terms
 consumer_terms = ["amendă", "sancțiune", "produs", "consumator", "comerciant", "verificare"]
-synonyms = extract_synonyms(wn, consumer_terms)
+synonyms = extract_synonyms(ro_wn, consumer_terms)
 
 print(f"\nFound {len(synonyms)} synonym pairs:")
 for syn1, syn2 in synonyms[:10]:
@@ -316,7 +317,7 @@ for syn1, syn2 in synonyms[:10]:
 # %%
 # Extract antonyms
 test_terms = ["bun", "legal", "conform"]
-antonyms = extract_antonyms(wn, test_terms)
+antonyms = extract_antonyms(ro_wn, test_terms)
 
 if antonyms:
     print(f"\nFound {len(antonyms)} antonym pairs:")
@@ -331,8 +332,11 @@ else:
 # RoWordNet supports various semantic relations:
 
 # %%
-print("\nAll relation types in RoWordNet:")
-for relation in wn.relation_types:
+print("\nAll relation types in RoWordNet (sampled):")
+# wn doesn't have a single method to list all available relations in a lexicon.
+# We can print some common ones from the relation types list.
+common_relations = ['hypernym', 'hyponym', 'antonym', 'similar', 'domain_topic', 'domain_region']
+for relation in common_relations:
     print(f"  - {relation}")
 # %% [markdown]
 # ## Summary

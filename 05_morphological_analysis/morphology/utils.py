@@ -91,42 +91,48 @@ def analyze_sentence_complexity(docs: List) -> Dict[str, float]:
 
 
 # ============================================================================
-# RoWordNet Helper Functions
+# Wordnet Helper Functions (using wn package)
 # ============================================================================
 
-def get_synset_info(wn, term: str, synset_index: int = 0) -> Optional[Dict]:
+def get_synset_info(wn_inst, term: str, synset_index: int = 0) -> Optional[Dict]:
     """
     Get basic information about a synset.
     
     Args:
-        wn: RoWordNet instance
+        wn_inst: Wordnet instance (e.g., wn.Wordnet('omw-ro:2.0'))
         term: The word to look up
         synset_index: Which synset to use (default: 0 = first)
     
     Returns:
         Dict with synset info or None if not found
     """
-    synsets = wn.synsets(term)
+    words = wn_inst.words(term)
+    if not words:
+        return None
+        
+    synsets = []
+    for w in words:
+        synsets.extend(w.synsets())
+        
     if not synsets or synset_index >= len(synsets):
         return None
     
-    synset_id = synsets[synset_index]
-    synset = wn.synset(synset_id)
+    synset = synsets[synset_index]
     
     return {
         "term": term,
-        "synset_id": synset_id,
-        "literals": list(synset.literals),
-        "definition": synset.definition,
+        "synset_id": synset.id,
+        "literals": synset.lemmas(),
+        "definition": synset.definition(),
     }
 
 
-def get_hypernym_chain(wn, term: str, synset_index: int = 0, max_depth: int = 5) -> List[str]:
+def get_hypernym_chain(wn_inst, term: str, synset_index: int = 0, max_depth: int = 5) -> List[str]:
     """
     Get the hypernym chain for a term (from specific to general).
     
     Args:
-        wn: RoWordNet instance
+        wn_inst: Wordnet instance
         term: The word to look up
         synset_index: Which synset to use
         max_depth: Maximum number of hypernyms to retrieve
@@ -134,111 +140,169 @@ def get_hypernym_chain(wn, term: str, synset_index: int = 0, max_depth: int = 5)
     Returns:
         List of hypernym literals
     """
-    synsets = wn.synsets(term)
+    words = wn_inst.words(term)
+    if not words:
+        return []
+        
+    synsets = []
+    for w in words:
+        synsets.extend(w.synsets())
+        
     if not synsets or synset_index >= len(synsets):
         return []
     
-    synset_id = synsets[synset_index]
-    hypernyms = wn.synset_to_hypernym_root(synset_id)
+    synset = synsets[synset_index]
     
-    return [wn.synset(h).literals[0] for h in hypernyms[:max_depth]]
+    chain = []
+    current_synset = synset
+    
+    for _ in range(max_depth):
+        try:
+            hypernyms = current_synset.hypernyms()
+        except:
+            break
+            
+        if not hypernyms:
+            break
+            
+        # Take the first hypernym
+        current_synset = hypernyms[0]
+        lemmas = current_synset.lemmas()
+        if lemmas:
+            chain.append(lemmas[0])
+        else:
+            chain.append(f"<{current_synset.id}>")
+        
+    return chain
 
 
-def get_all_relations(wn, term: str, synset_index: int = 0) -> Dict[str, List[str]]:
+def get_all_relations(wn_inst, term: str, synset_index: int = 0) -> Dict[str, List[str]]:
     """
-    Get all relations (inbound and outbound) for a synset.
+    Get all relations for a synset.
+    (Note: wn handles relations differently, we will group them by relation type)
     
     Args:
-        wn: RoWordNet instance
+        wn_inst: Wordnet instance
         term: The word to look up
         synset_index: Which synset to use
     
     Returns:
-        Dict with 'outbound' and 'inbound' relations
+        Dict with 'outbound' and 'inbound' relations (for compatibility, though wn relations are bidirectional in API)
     """
-    synsets = wn.synsets(term)
+    words = wn_inst.words(term)
+    if not words:
+        return {"outbound": [], "inbound": []}
+        
+    synsets = []
+    for w in words:
+        synsets.extend(w.synsets())
+        
     if not synsets or synset_index >= len(synsets):
         return {"outbound": [], "inbound": []}
     
-    synset_id = synsets[synset_index]
+    synset = synsets[synset_index]
     
-    outbound = [
-        {"relation": rel, "target": wn.synset(target_id).literals[0]}
-        for target_id, rel in wn.outbound_relations(synset_id)
-    ]
-    
-    inbound = [
-        {"relation": rel, "source": wn.synset(source_id).literals[0]}
-        for source_id, rel in wn.inbound_relations(synset_id)
-    ]
-    
-    return {"outbound": outbound, "inbound": inbound}
+    # We map 'wn' relations to the old list format for compatibility
+    outbound = []
+    for rel_type, related_synsets in synset.relations().items():
+        for rs in related_synsets:
+            # We skip INFERRED nodes as they don't have lemmas
+            if rs.id == '*INFERRED*':
+                continue
+            lemmas = rs.lemmas()
+            if lemmas:
+                outbound.append({"relation": rel_type, "target": lemmas[0]})
+            else:
+                outbound.append({"relation": rel_type, "target": rs.id})
+                
+    # `wn` doesn't strictly separate inbound/outbound at the relation dict level the same way,
+    # but we can just return empty inbound for compatibility, or populate it if needed.
+    return {"outbound": outbound, "inbound": []}
 
 
-def find_semantic_path(wn, term1: str, term2: str) -> Optional[List[str]]:
+def find_semantic_path(wn_inst, term1: str, term2: str) -> Optional[List[str]]:
     """
     Find the shortest semantic path between two terms.
     
     Args:
-        wn: RoWordNet instance
+        wn_inst: Wordnet instance
         term1: First term
         term2: Second term
     
     Returns:
         List of synset literals in the path, or None if no path found
     """
-    synsets1 = wn.synsets(term1)
-    synsets2 = wn.synsets(term2)
+    words1 = wn_inst.words(term1)
+    words2 = wn_inst.words(term2)
+    
+    if not words1 or not words2:
+        return None
+        
+    synsets1 = words1[0].synsets()
+    synsets2 = words2[0].synsets()
     
     if not synsets1 or not synsets2:
         return None
+        
+    synset1 = synsets1[0]
+    synset2 = synsets2[0]
     
-    synset1_id = synsets1[0]
-    synset2_id = synsets2[0]
-    
-    path = wn.shortest_path(synset1_id, synset2_id)
-    
-    if not path:
+    try:
+        path = synset1.shortest_path(synset2)
+        if not path:
+            return None
+        return [s.lemmas()[0] for s in path if s.lemmas()]
+    except:
         return None
-    
-    return [wn.synset(sid).literals[0] for sid in path]
 
 
-def find_common_ancestor(wn, term1: str, term2: str) -> Optional[str]:
+def find_common_ancestor(wn_inst, term1: str, term2: str) -> Optional[str]:
     """
     Find the lowest common hypernym ancestor of two terms.
     
     Args:
-        wn: RoWordNet instance
+        wn_inst: Wordnet instance
         term1: First term
         term2: Second term
     
     Returns:
         The common ancestor literal, or None if not found
     """
-    synsets1 = wn.synsets(term1)
-    synsets2 = wn.synsets(term2)
+    words1 = wn_inst.words(term1)
+    words2 = wn_inst.words(term2)
+    
+    if not words1 or not words2:
+        return None
+        
+    synsets1 = words1[0].synsets()
+    synsets2 = words2[0].synsets()
     
     if not synsets1 or not synsets2:
         return None
+        
+    synset1 = synsets1[0]
+    synset2 = synsets2[0]
     
-    synset1_id = synsets1[0]
-    synset2_id = synsets2[0]
-    
-    ancestor_id = wn.lowest_hypernym_common_ancestor(synset1_id, synset2_id)
-    
-    if not ancestor_id:
+    try:
+        ancestors = synset1.lowest_common_hypernyms(synset2)
+        if not ancestors:
+            return None
+            
+        for a in ancestors:
+            lemmas = a.lemmas()
+            if lemmas:
+                return lemmas[0]
         return None
-    
-    return wn.synset(ancestor_id).literals[0]
+    except:
+        return None
 
 
-def extract_synonyms(wn, terms: List[str]) -> List[Tuple[str, str]]:
+def extract_synonyms(wn_inst, terms: List[str]) -> List[Tuple[str, str]]:
     """
     Extract synonym pairs from a list of terms.
     
     Args:
-        wn: RoWordNet instance
+        wn_inst: Wordnet instance
         terms: List of terms to extract synonyms from
     
     Returns:
@@ -247,10 +311,16 @@ def extract_synonyms(wn, terms: List[str]) -> List[Tuple[str, str]]:
     synonyms = []
     
     for term in terms:
-        synsets_id = wn.synsets(term)
-        for synset_id in synsets_id[:1]:  # Just first synset
-            synset = wn.synset(synset_id)
-            literals = list(synset.literals)
+        words = wn_inst.words(term)
+        if not words:
+            continue
+            
+        synsets = []
+        for w in words:
+            synsets.extend(w.synsets())
+            
+        for synset in synsets[:1]:  # Just first synset
+            literals = synset.lemmas()
             
             # Create pairs from literals in the same synset
             for i in range(len(literals)):
@@ -260,12 +330,12 @@ def extract_synonyms(wn, terms: List[str]) -> List[Tuple[str, str]]:
     return list(set(synonyms))  # Remove duplicates
 
 
-def extract_antonyms(wn, terms: List[str]) -> List[Tuple[str, str]]:
+def extract_antonyms(wn_inst, terms: List[str]) -> List[Tuple[str, str]]:
     """
     Extract antonym pairs from a list of terms.
     
     Args:
-        wn: RoWordNet instance
+        wn_inst: Wordnet instance
         terms: List of terms to extract antonyms from
     
     Returns:
@@ -274,23 +344,29 @@ def extract_antonyms(wn, terms: List[str]) -> List[Tuple[str, str]]:
     antonyms = []
     
     for term in terms:
-        synsets_id = wn.synsets(term)
-        for synset_id in synsets_id[:2]:  # First 2 synsets
-            synset = wn.synset(synset_id)
+        words = wn_inst.words(term)
+        if not words:
+            continue
             
-            # Extract antonym relations
-            synset_outbound = wn.outbound_relations(synset.id)
-            synset_antonyms_id = [
-                synset_tuple[0] for synset_tuple in synset_outbound
-                if synset_tuple[1] == 'near_antonym'
-            ]
+        synsets = []
+        for w in words:
+            synsets.extend(w.synsets())
             
-            for synset_antonym_id in synset_antonyms_id:
-                synset_antonym = wn.synset(synset_antonym_id)
-                
+        for synset in synsets[:2]:  # First 2 synsets
+            relations = synset.relations()
+            
+            # Check for antonym relations (in wn, it's often 'antonym' or similar)
+            # In omw, near_antonym might be mapped differently or just not present
+            # We'll check 'antonym' and 'near_antonym'
+            antonym_synsets = []
+            for rel_type in ['antonym', 'near_antonym']:
+                if rel_type in relations:
+                    antonym_synsets.extend(relations[rel_type])
+            
+            for synset_antonym in antonym_synsets:
                 # Generate cartesian product of literals
-                synset_literals = list(synset.literals)
-                antonym_literals = list(synset_antonym.literals)
+                synset_literals = synset.lemmas()
+                antonym_literals = synset_antonym.lemmas()
                 
                 for lit1, lit2 in itertools.product(synset_literals, antonym_literals):
                     antonyms.append((lit1, lit2))

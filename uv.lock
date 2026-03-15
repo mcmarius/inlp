@@ -198,6 +198,7 @@ dependencies = [
     { name = "seaborn" },
     { name = "setuptools" },
     { name = "spacy" },
+    { name = "wn" },
     { name = "wordcloud" },
 ]
 
@@ -225,6 +226,7 @@ requires-dist = [
     { name = "seaborn", specifier = ">=0.13.0" },
     { name = "setuptools", specifier = "<70" },
     { name = "spacy", specifier = ">=3.7.0" },
+    { name = "wn", specifier = ">=1.0.0" },
     { name = "wordcloud", specifier = ">=1.9.3" },
 ]
 provides-extras = ["dev"]
@@ -3964,6 +3966,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/bd/f4/c67440c7fb409a71b7404b7aefcd7569a9c0d6bd071299bf4198ae7a5d95/widgetsnbextension-4.0.15.tar.gz", hash = "sha256:de8610639996f1567952d763a5a41af8af37f2575a41f9852a38f947eb82a3b9", size = 1097402, upload-time = "2025-11-01T21:15:55.178Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/3f/0e/fa3b193432cfc60c93b42f3be03365f5f909d2b3ea410295cf36df739e31/widgetsnbextension-4.0.15-py3-none-any.whl", hash = "sha256:8156704e4346a571d9ce73b84bee86a29906c9abfd7223b7228a28899ccf3366", size = 2196503, upload-time = "2025-11-01T21:15:53.565Z" },
+]
+
+[[package]]
+name = "wn"
+version = "1.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "httpx" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d9/29/c225f35bf237e6bb21a7af47b570f5710a8d803c31d307728ebb70faf6f7/wn-1.0.0.tar.gz", hash = "sha256:216c0e635f9df5b7dc8c8fc360a649477f7d299adcd06578ebda851c1b2e6a59", size = 160672, upload-time = "2026-02-01T04:43:07.261Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/52/19/4c223c0f3a8f0eb41992cb6a66208a42c4e8dffc5c91b48e7d532d542aec/wn-1.0.0-py3-none-any.whl", hash = "sha256:5d721afc53c650460cd5c8bdb02c249e45311e4726376d947acc45a86b916019", size = 94495, upload-time = "2026-02-01T04:43:05.639Z" },
 ]
 
 [[package]]

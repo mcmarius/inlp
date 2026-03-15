@@ -16,6 +16,7 @@ dependencies = [
     "ro_core_news_sm @ https://github.com/explosion/spacy-models/releases/download/ro_core_news_sm-3.8.0/ro_core_news_sm-3.8.0-py3-none-any.whl",
     "ipython>=9.8.0",
     "setuptools<70",
+    "wn>=1.0.0",
 ]
 
 [project.optional-dependencies]
