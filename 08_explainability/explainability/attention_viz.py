@@ -49,6 +49,12 @@ def extract_attention_weights(
     
     # Extract attention weights
     # outputs.attentions is a tuple of (num_layers,) each with shape (batch, heads, seq, seq)
+    if outputs.attentions is None or len(outputs.attentions) == 0:
+        raise RuntimeError(
+            "No attention weights were returned. If using a modern transformer model, "
+            "ensure it's loaded with attn_implementation='eager' to support output_attentions=True."
+        )
+        
     attention = torch.stack(outputs.attentions)  # (layers, batch, heads, seq, seq)
     attention = attention.squeeze(1)  # Remove batch dimension: (layers, heads, seq, seq)
     

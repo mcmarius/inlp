@@ -551,7 +551,7 @@ MODEL_NAME = "racai/distilbert-base-romanian-cased"
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-model = AutoModel.from_pretrained(MODEL_NAME)
+model = AutoModel.from_pretrained(MODEL_NAME, attn_implementation="eager")
 model.to(device)
 
 print(f"Loaded {MODEL_NAME} on {device}")
