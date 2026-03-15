@@ -59,7 +59,7 @@ jobs:
       uses: actions/cache/restore@v5
       if: ${{ inputs.run_notebooks }}
       with:
-        key: ${{ runner.os }}-scraper-data-${{ github.run_id }}
+        key: ${{ runner.os }}-scraper-data-${{ github.run_id }}-${{ github.run_attempt }}
         restore-keys: ${{ runner.os }}-scraper-data
         path: |
           01_data_collection/data
@@ -91,7 +91,7 @@ jobs:
       uses: actions/cache/save@v5
       if: ${{ always() && inputs.run_notebooks }}
       with:
-        key: ${{ runner.os }}-scraper-data-${{ github.run_id }}
+        key: ${{ runner.os }}-scraper-data-${{ github.run_id }}-${{ github.run_attempt }}
         path: |
           01_data_collection/data
           02_data_preprocessing/data
