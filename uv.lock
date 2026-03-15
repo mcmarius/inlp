@@ -8,7 +8,9 @@ members = [
     "02-data-preprocessing",
     "03-exploratory-data-analysis",
     "04-word-representations",
+    "05-morphological-analysis",
     "06-transformers",
+    "07-llms",
     "08-explainability",
     "romanian-nlp-lab",
 ]
@@ -143,6 +145,7 @@ dependencies = [
     { name = "requests" },
     { name = "scikit-learn" },
     { name = "seaborn" },
+    { name = "statsmodels" },
     { name = "torch" },
     { name = "transformers" },
     { name = "umap-learn" },
@@ -159,11 +162,56 @@ requires-dist = [
     { name = "requests" },
     { name = "scikit-learn" },
     { name = "seaborn" },
+    { name = "statsmodels", specifier = ">=0.14.6" },
     { name = "torch" },
     { name = "transformers" },
     { name = "umap-learn" },
     { name = "wordcloud" },
 ]
+
+[[package]]
+name = "05-morphological-analysis"
+version = "0.1.0"
+source = { virtual = "05_morphological_analysis" }
+dependencies = [
+    { name = "adjusttext" },
+    { name = "ipython" },
+    { name = "matplotlib" },
+    { name = "nltk" },
+    { name = "pandas" },
+    { name = "ro-core-news-sm" },
+    { name = "rowordnet" },
+    { name = "seaborn" },
+    { name = "spacy" },
+    { name = "wordcloud" },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "jupyter" },
+    { name = "jupytext" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "adjusttext", specifier = ">=1.1.1" },
+    { name = "ipython", specifier = ">=9.8.0" },
+    { name = "jupyter", marker = "extra == 'dev'", specifier = ">=1.0.0" },
+    { name = "jupytext", marker = "extra == 'dev'", specifier = ">=1.15.0" },
+    { name = "matplotlib", specifier = ">=3.8.0" },
+    { name = "nltk", specifier = ">=3.8.0" },
+    { name = "pandas", specifier = ">=2.1.0" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.4.0" },
+    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.1.0" },
+    { name = "ro-core-news-sm", url = "https://github.com/explosion/spacy-models/releases/download/ro_core_news_sm-3.8.0/ro_core_news_sm-3.8.0-py3-none-any.whl" },
+    { name = "rowordnet", specifier = ">=0.5.0" },
+    { name = "seaborn", specifier = ">=0.13.0" },
+    { name = "spacy", specifier = ">=3.7.0" },
+    { name = "wordcloud", specifier = ">=1.9.3" },
+]
+provides-extras = ["dev"]
 
 [[package]]
 name = "06-transformers"
@@ -213,6 +261,36 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [{ name = "pytest" }]
+
+[[package]]
+name = "07-llms"
+version = "0.1.0"
+source = { virtual = "07_llms" }
+dependencies = [
+    { name = "jupyter" },
+    { name = "jupytext" },
+    { name = "matplotlib" },
+    { name = "pandas" },
+    { name = "seaborn" },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "pytest" },
+    { name = "pytest-cov" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "jupyter", specifier = ">=1.0.0" },
+    { name = "jupytext", specifier = ">=1.15.0" },
+    { name = "matplotlib", specifier = ">=3.8.0" },
+    { name = "pandas", specifier = ">=2.1.0" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.4.0" },
+    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.1.0" },
+    { name = "seaborn", specifier = ">=0.13.0" },
+]
+provides-extras = ["dev"]
 
 [[package]]
 name = "08-explainability"
@@ -1975,6 +2053,18 @@ wheels = [
 ]
 
 [[package]]
+name = "numpy-typing-compat"
+version = "20251206.2.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/77/83/dd90774d6685664cbe5525645a50c4e6c7454207aee552918790e879137f/numpy_typing_compat-20251206.2.3.tar.gz", hash = "sha256:18e00e0f4f2040fe98574890248848c7c6831a975562794da186cf4f3c90b935", size = 5009, upload-time = "2025-12-06T20:02:04.177Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/48/6f/dde8e2a79a3b6cbc31bc1037c1a1dbc07c90d52d946851bd7cba67e730a8/numpy_typing_compat-20251206.2.3-py3-none-any.whl", hash = "sha256:bfa2e4c4945413e84552cbd34a6d368c88a06a54a896e77ced760521b08f0f61", size = 6300, upload-time = "2025-12-06T20:01:56.664Z" },
+]
+
+[[package]]
 name = "nvidia-cublas-cu12"
 version = "12.8.4.1"
 source = { registry = "https://pypi.org/simple" }
@@ -2109,6 +2199,24 @@ wheels = [
 ]
 
 [[package]]
+name = "optype"
+version = "0.15.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d7/93/6b9e43138ce36fbad134bd1a50460a7bbda61105b5a964e4cf773fe4d845/optype-0.15.0.tar.gz", hash = "sha256:457d6ca9e7da19967ec16d42bdf94e240b33b5d70a56fbbf5b427e5ea39cf41e", size = 99978, upload-time = "2025-12-08T12:32:41.422Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/07/8b/93f6c496fc5da062fd7e7c4745b5a8dd09b7b576c626075844fe97951a7d/optype-0.15.0-py3-none-any.whl", hash = "sha256:caba40ece9ea39b499fa76c036a82e0d452a432dd4dd3e8e0d30892be2e8c76c", size = 88716, upload-time = "2025-12-08T12:32:39.669Z" },
+]
+
+[package.optional-dependencies]
+numpy = [
+    { name = "numpy" },
+    { name = "numpy-typing-compat" },
+]
+
+[[package]]
 name = "outcome"
 version = "1.3.0.post0"
 source = { registry = "https://pypi.org/simple" }
@@ -2166,6 +2274,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/d4/de/53e0bcf53d13e005bd8c92e7855142494f41171b34c2536b86187474184d/parso-0.8.5.tar.gz", hash = "sha256:034d7354a9a018bdce352f48b2a8a450f05e9d6ee85db84764e9b6bd96dafe5a", size = 401205, upload-time = "2025-08-23T15:15:28.028Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/16/32/f8e3c85d1d5250232a5d3477a2a28cc291968ff175caeadaf3cc19ce0e4a/parso-0.8.5-py2.py3-none-any.whl", hash = "sha256:646204b5ee239c396d040b90f9e272e9a8017c630092bf59980beb62fd033887", size = 106668, upload-time = "2025-08-23T15:15:25.663Z" },
+]
+
+[[package]]
+name = "patsy"
+version = "1.0.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/be/44/ed13eccdd0519eff265f44b670d46fbb0ec813e2274932dc1c0e48520f7d/patsy-1.0.2.tar.gz", hash = "sha256:cdc995455f6233e90e22de72c37fcadb344e7586fb83f06696f54d92f8ce74c0", size = 399942, upload-time = "2025-10-20T16:17:37.535Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f1/70/ba4b949bdc0490ab78d545459acd7702b211dfccf7eb89bbc1060f52818d/patsy-1.0.2-py2.py3-none-any.whl", hash = "sha256:37bfddbc58fcf0362febb5f54f10743f8b21dd2aa73dec7e7ef59d1b02ae668a", size = 233301, upload-time = "2025-10-20T16:17:36.563Z" },
 ]
 
 [[package]]
@@ -2720,25 +2840,47 @@ wheels = [
 ]
 
 [[package]]
+name = "ro-core-news-sm"
+version = "3.8.0"
+source = { url = "https://github.com/explosion/spacy-models/releases/download/ro_core_news_sm-3.8.0/ro_core_news_sm-3.8.0-py3-none-any.whl" }
+wheels = [
+    { url = "https://github.com/explosion/spacy-models/releases/download/ro_core_news_sm-3.8.0/ro_core_news_sm-3.8.0-py3-none-any.whl", hash = "sha256:3cebfba2437131efe95345adcc7ea2131e4463915652df9099c577e618460cd9" },
+]
+
+[[package]]
 name = "romanian-nlp-lab"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "ipykernel" },
+    { name = "pandas" },
+    { name = "scikit-learn" },
+    { name = "scipy-stubs" },
+    { name = "statsmodels" },
 ]
 
 [package.dev-dependencies]
 dev = [
+    { name = "jupyter" },
+    { name = "notebook" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "pytest-cov" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ipykernel", specifier = ">=7.1.0" }]
+requires-dist = [
+    { name = "ipykernel", specifier = ">=7.1.0" },
+    { name = "pandas" },
+    { name = "scikit-learn" },
+    { name = "scipy-stubs", specifier = "~=1.16.3" },
+    { name = "statsmodels", specifier = ">=0.14.6" },
+]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "jupyter", specifier = ">=1.0.0" },
+    { name = "notebook", specifier = ">=7.0.0" },
     { name = "pytest", specifier = ">=8.0.0" },
     { name = "pytest-asyncio", specifier = ">=0.21.0" },
     { name = "pytest-cov", specifier = ">=4.1.0" },
@@ -2755,6 +2897,19 @@ dependencies = [
     { name = "six" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/e2/c5/9136736c37022a6ad27fea38f3111eb8f02fe75d067f9a985cc358653102/rouge_score-0.1.2.tar.gz", hash = "sha256:c7d4da2683e68c9abf0135ef915d63a46643666f848e558a1b9f7ead17ff0f04", size = 17400, upload-time = "2022-07-22T22:46:22.909Z" }
+
+[[package]]
+name = "rowordnet"
+version = "1.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "lxml" },
+    { name = "networkx" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/41/be/0a037a23039000d72c54f1263c22b3fdab36690cff6e641e8d4365030a98/rowordnet-1.1.0.tar.gz", hash = "sha256:c763deff18432c3dcdbcb4ec9deb33c9a4f73bc5474c861a7d2cd8180d0f2149", size = 11664922, upload-time = "2020-08-06T10:47:14.898Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/80/f0/f68839a9545b5d23b1d67a258c6dfbedc61667eea68591701dc5b9d9e0b1/rowordnet-1.1.0-py3-none-any.whl", hash = "sha256:8ceaa0de7ebf2f976d56aae4a90bcf5f8658a6b423ec9579c70c45807dcff4fb", size = 11807767, upload-time = "2020-08-06T10:47:09.826Z" },
+]
 
 [[package]]
 name = "rpds-py"
@@ -2878,6 +3033,18 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/82/31/006cbb4b648ba379a95c87262c2855cd0d09453e500937f78b30f02fa1cd/scipy-1.16.3-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:c5192722cffe15f9329a3948c4b1db789fbb1f05c97899187dcf009b283aea70", size = 38678975, upload-time = "2025-10-28T17:33:15.809Z" },
     { url = "https://files.pythonhosted.org/packages/c2/7f/acbd28c97e990b421af7d6d6cd416358c9c293fc958b8529e0bd5d2a2a19/scipy-1.16.3-cp312-cp312-win_amd64.whl", hash = "sha256:56edc65510d1331dae01ef9b658d428e33ed48b4f77b1d51caf479a0253f96dc", size = 38555926, upload-time = "2025-10-28T17:33:21.388Z" },
     { url = "https://files.pythonhosted.org/packages/ce/69/c5c7807fd007dad4f48e0a5f2153038dc96e8725d3345b9ee31b2b7bed46/scipy-1.16.3-cp312-cp312-win_arm64.whl", hash = "sha256:a8a26c78ef223d3e30920ef759e25625a0ecdd0d60e5a8818b7513c3e5384cf2", size = 25463014, upload-time = "2025-10-28T17:33:25.975Z" },
+]
+
+[[package]]
+name = "scipy-stubs"
+version = "1.16.3.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "optype", extra = ["numpy"] },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/08/91/1700d2a1a9f64f19bb019a547e510b99a6af1fef49641a0bce86bc85fb8e/scipy_stubs-1.16.3.3.tar.gz", hash = "sha256:af47578875d5557567225a16ec1b9b38a48c4c4377d92396413ebd65406c44ee", size = 361468, upload-time = "2025-12-08T13:45:38.37Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7c/e2/3b8826f281f59301e3284989b19cfc56fdccf799134c1befedd38482a23a/scipy_stubs-1.16.3.3-py3-none-any.whl", hash = "sha256:f6316b36cd0fb272c994ae5b10c4a73c644a7e156ed8d32bcd9c35303d0e1b7e", size = 561750, upload-time = "2025-12-08T13:45:36.568Z" },
 ]
 
 [[package]]
@@ -3149,6 +3316,27 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/07/e5/acd22862a75f424d98bb690fec9ab292da6e797cab367fa8fa451c547637/stanza-1.11.0.tar.gz", hash = "sha256:42ba9d4752e74c4e1e6fc2ca96e98bb8fa194049782cc35fde2a5118fd5f75ab", size = 1484551, upload-time = "2025-10-05T06:44:03.665Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e0/47/c6f8dd24ca100f6c260209b27be4d2e0ae68f13d4b2b4b1b343876c9e765/stanza-1.11.0-py3-none-any.whl", hash = "sha256:3a0bcf24830e32e88f6d0cff1e757661e53ed1b60149fa7f72211d61c6dab063", size = 1706081, upload-time = "2025-10-05T06:43:59.247Z" },
+]
+
+[[package]]
+name = "statsmodels"
+version = "0.14.6"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+    { name = "packaging" },
+    { name = "pandas" },
+    { name = "patsy" },
+    { name = "scipy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0d/81/e8d74b34f85285f7335d30c5e3c2d7c0346997af9f3debf9a0a9a63de184/statsmodels-0.14.6.tar.gz", hash = "sha256:4d17873d3e607d398b85126cd4ed7aad89e4e9d89fc744cdab1af3189a996c2a", size = 20689085, upload-time = "2025-12-05T23:08:39.522Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/25/ce/308e5e5da57515dd7cab3ec37ea2d5b8ff50bef1fcc8e6d31456f9fae08e/statsmodels-0.14.6-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:fe76140ae7adc5ff0e60a3f0d56f4fffef484efa803c3efebf2fcd734d72ecb5", size = 10091932, upload-time = "2025-12-05T19:28:55.446Z" },
+    { url = "https://files.pythonhosted.org/packages/05/30/affbabf3c27fb501ec7b5808230c619d4d1a4525c07301074eb4bda92fa9/statsmodels-0.14.6-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:26d4f0ed3b31f3c86f83a92f5c1f5cbe63fc992cd8915daf28ca49be14463a1c", size = 9997345, upload-time = "2025-12-05T19:29:10.278Z" },
+    { url = "https://files.pythonhosted.org/packages/48/f5/3a73b51e6450c31652c53a8e12e24eac64e3824be816c0c2316e7dbdcb7d/statsmodels-0.14.6-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:d8c00a42863e4f4733ac9d078bbfad816249c01451740e6f5053ecc7db6d6368", size = 10058649, upload-time = "2025-12-05T23:10:12.775Z" },
+    { url = "https://files.pythonhosted.org/packages/81/68/dddd76117df2ef14c943c6bbb6618be5c9401280046f4ddfc9fb4596a1b8/statsmodels-0.14.6-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:19b58cf7474aa9e7e3b0771a66537148b2df9b5884fbf156096c0e6c1ff0469d", size = 10339446, upload-time = "2025-12-05T23:10:28.503Z" },
+    { url = "https://files.pythonhosted.org/packages/56/4a/dce451c74c4050535fac1ec0c14b80706d8fc134c9da22db3c8a0ec62c33/statsmodels-0.14.6-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:81e7dcc5e9587f2567e52deaff5220b175bf2f648951549eae5fc9383b62bc37", size = 10368705, upload-time = "2025-12-05T23:10:44.339Z" },
+    { url = "https://files.pythonhosted.org/packages/60/15/3daba2df40be8b8a9a027d7f54c8dedf24f0d81b96e54b52293f5f7e3418/statsmodels-0.14.6-cp312-cp312-win_amd64.whl", hash = "sha256:b5eb07acd115aa6208b4058211138393a7e6c2cf12b6f213ede10f658f6a714f", size = 9543991, upload-time = "2025-12-05T23:10:58.536Z" },
 ]
 
 [[package]]

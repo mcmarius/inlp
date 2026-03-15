@@ -5,6 +5,10 @@ description = "A collection of modules for Romanian NLP"
 requires-python = "~=3.12.0"
 dependencies = [
     "ipykernel>=7.1.0",
+    "scipy-stubs~=1.16.3",
+    "pandas",
+    "scikit-learn",
+    "statsmodels>=0.14.6",
 ]
 
 [dependency-groups]
@@ -12,13 +16,33 @@ dev = [
     "pytest>=8.0.0",
     "pytest-cov>=4.1.0",
     "pytest-asyncio>=0.21.0",
+    "jupyter>=1.0.0",
+    "notebook>=7.0.0",
 ]
 
 [tool.uv.workspace]
-members = ["01_data_collection", "02_data_preprocessing", "03_exploratory_data_analysis", "04_word_representations", "06_transformers", "08_explainability"]
+members = [
+    "01_data_collection",
+    "02_data_preprocessing",
+    "03_exploratory_data_analysis",
+    "04_word_representations",
+    "05_morphological_analysis",
+    "06_transformers",
+    "07_llms",
+    "08_explainability",
+]
 
 [tool.pytest.ini_options]
-pythonpath = ["01_data_collection", "02_data_preprocessing", "03_exploratory_data_analysis", "04_word_representations", "06_transformers", "08_explainability"]
+pythonpath = [
+    "01_data_collection",
+    "02_data_preprocessing",
+    "03_exploratory_data_analysis",
+    "04_word_representations",
+    "05_morphological_analysis",
+    "06_transformers",
+    "07_llms",
+    "08_explainability",
+]
 addopts = "--cov --cov-report=term-missing"
 
 [tool.coverage.run]
