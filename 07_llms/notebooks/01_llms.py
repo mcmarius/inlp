@@ -246,20 +246,20 @@
 #
 # ### Mixture of Experts (MoE)
 # *   [Mixtral of Experts (Technical Blog)](https://mistral.ai/news/mixtral-of-experts/)
-# *   [Qwen2.5-Coder: Empowering Everyone with Code (Technical Report)](https://arxiv.org/abs/2409.12186)
+# *   [Qwen3-Coder-Next: Pushing Small Hybrid Models on Agentic Coding](https://github.com/QwenLM/Qwen3-Coder/blob/main/qwen3_coder_next_tech_report.pdf)
 # *   [DeepSeek-V3 Technical Report](https://arxiv.org/abs/2412.19437)
-# *   [Liquid Foundation Models (Liquid AI Blog)](https://www.liquid.ai/blog/liquid-foundation-models)
+# *   [Liquid Foundation Models (Liquid AI Blog)](https://www.liquid.ai/blog/no-cloud-tool-calling-agents-consumer-hardware-lfm2-24b-a2b)
 #
 # ### Emergent Directions (Diffusion & MXFP)
 # *   [LLaDA: Large Language Diffusion with mAsking](https://arxiv.org/abs/2502.09992)
-# *   [Mercury-Coder: High-speed coding via Diffusion (Inception Labs)](https://www.inceptionlabs.ai/)
+# *   [Mercury 2 (Inception Labs)](https://www.inceptionlabs.ai/blog/introducing-mercury-2)
 # *   [OCP Microscaling Formats (MX) Specification](https://www.opencompute.org/documents/ocp-microscaling-formats-mx-v1-0-spec-final-pdf)
 #
 # ### Inference Optimizations
 # *   [FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135)
 # *   [vLLM: Easy, Fast, and Cheap LLM Serving with PagedAttention](https://arxiv.org/abs/2309.06180)
-# *   [Fast Inference from Transformers via Speculative Decoding](https://arxiv.org/abs/2211.17115)
+# *   [Fast Inference from Transformers via Speculative Decoding](https://arxiv.org/pdf/2211.17192)
 #
 # ### Quantization
-# *   [GGUF Specification (llama.cpp)](https://github.com/ggerganov/llama.cpp/blob/master/docs/gguf.md)
+# *   [GGUF Specification (llama.cpp)](https://github.com/ggml-org/ggml/blob/master/docs/gguf.md)
 # *   [AWQ: Activation-aware Weight Quantization for LLM Compression](https://arxiv.org/abs/2306.00978)

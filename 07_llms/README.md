@@ -27,8 +27,3 @@ This module explores the evolution, architecture, and deployment of Large Langua
 
 ## Hands-on Exercise
 The provided notebook guides you through running powerful models locally using **Ollama** and experimenting with reasoning capabilities on modest hardware.
-
-## Resources
-- [FlashAttention Paper](https://arxiv.org/abs/2205.14135)
-- [DeepSeek-V3 Technical Report](https://arxiv.org/abs/2412.19437)
-- [vLLM Documentation](https://github.com/vllm-project/vllm)
