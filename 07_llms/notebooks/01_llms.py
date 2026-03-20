@@ -45,6 +45,104 @@
 # *   **Examples**: OpenAI o1, DeepSeek-R1.
 
 # %% [markdown]
+# ### 1.4. AI Coding Agents
+#
+# Beyond single-turn Q&A, modern LLMs are increasingly deployed as **AI Coding Agents**—autonomous systems that can plan, execute, and iterate on complex software development tasks.
+#
+# #### What Makes an AI Coding Agent?
+# An AI coding agent combines a language model with **tool use**, **planning capabilities**, and **memory** to perform multi-step coding tasks autonomously:
+# *   **Tool Use**: Access to code execution, file I/O, shell commands, APIs, and debugging tools.
+# *   **Planning**: Breaking down complex requirements into manageable subtasks and sequencing them logically.
+# *   **Memory**: Maintaining context across long interactions, including conversation history, code changes, and execution results.
+# *   **Iteration**: Testing, debugging, and refining solutions based on feedback from execution or user input.
+#
+# #### Key Components of a Coding Agent
+# ```mermaid
+# graph LR
+#     Agent[AI Coding Agent] --> Planner[Planner/Reasoner]
+#     Agent --> Memory[Memory/Context]
+#     Agent --> Executor[Code Executor]
+#     
+#     Planner --> Tools[Tools & APIs]
+#     Planner --> Shell[Shell Commands]
+#     Planner --> Repo[Codebase Access]
+#     
+#     Memory --> History[Conversation History]
+#     Memory --> Code[Codebase State]
+#     Memory --> Results[Execution Results]
+#     
+#     Executor --> Test[Run Tests]
+#     Executor --> Debug[Debug Errors]
+#     Executor --> Deploy[Deploy & Monitor]
+# ```
+#
+# #### 1.4.1. Planning & Reasoning
+# Advanced agents use **hierarchical planning** to decompose tasks:
+# 1. **Goal Understanding**: Parse high-level requirements into actionable steps.
+# 2. **Subtask Decomposition**: Break tasks into smaller, verifiable subtasks.
+# 3. **Execution & Verification**: Run code, check outputs, and iterate if failures occur.
+# 4. **Refinement**: Optimize solutions based on performance metrics or user feedback.
+#
+# <details>
+# <summary><b>Example: Planning a Feature Implementation</b></summary>
+#
+# ```
+# User Request: "Add a login endpoint to our Flask API"
+#
+# Agent's Plan:
+# 1. Analyze existing codebase structure
+# 2. Design authentication schema (user table, tokens)
+# 3. Create database migration for users table
+# 4. Implement /login and /register endpoints
+# 5. Add password hashing (bcrypt)
+# 6. Write unit tests for authentication
+# 7. Run tests and fix any failures
+# 8. Document the API endpoints
+# ```
+# </details>
+#
+# #### 1.4.2. Tool Integration
+# Coding agents excel when equipped with the right tools:
+# | **Tool Type** | **Capabilities** | **Examples** |
+# |---------------|------------------|--------------|
+# | **Code Execution** | Run Python, shell commands, sandboxed environments | `exec_python()`, `bash()` |
+# | **File System** | Read/write/edit files, navigate directories | `open_file()`, `list_dir()` |
+# | **Version Control** | Git operations for versioning and collaboration | `git_commit()`, `git_diff()` |
+# | **Testing** | Run test suites, analyze coverage | `pytest()`, `coverage_report()` |
+# | **API Access** | Query external services, fetch documentation | `api_request()`, `docs_search()` |
+# | **IDE Integration** | Syntax highlighting, linting, refactoring | `linter_check()`, `refactor()` |
+#
+# #### 1.4.3. Memory & Context Management
+# Long-horizon tasks require effective memory management:
+# *   **Short-term Memory**: Current conversation context (typically 128K–1M tokens).
+# *   **Long-term Memory**: Vector embeddings of past interactions, code snippets, and decisions.
+# *   **Codebase Indexing**: Semantic search over the entire codebase for relevant patterns.
+# *   **Execution Logs**: Persistent records of test results, errors, and performance metrics.
+#
+# #### Popular AI Coding Agents
+# Several frameworks and tools have emerged to enable AI coding agents:
+# *   **OpenHands**: Open-source agent framework with support for custom tools and environments.
+# *   **Devin**: Commercial AI software engineer (Cognition Labs) with full IDE access.
+# *   **Cursor**: AI-powered IDE with built-in agent capabilities for code generation and refactoring.
+# *   **Windsurf**: AI coding assistant with multi-file context understanding.
+# *   **Qwen-Coder**: Specialized in coding tasks with MoE architecture for efficiency.
+#
+# #### 1.4.4. Challenges & Limitations
+# Despite rapid progress, AI coding agents face several challenges:
+# *   **Hallucination**: Generating plausible but incorrect code or API calls.
+# *   **Security Risks**: Accidentally introducing vulnerabilities or exposing sensitive data.
+# *   **Context Limits**: Struggling with very large codebases beyond context window.
+# *   **Testing Gaps**: Missing edge cases or failing to write comprehensive tests.
+# *   **Debugging Complexity**: Struggling to diagnose deeply nested or cross-file bugs.
+#
+# #### Best Practices for Agent-Assisted Development
+# 1. **Review All Changes**: Never deploy agent-generated code without human review.
+# 2. **Write Tests First**: Use TDD to guide the agent and catch regressions early.
+# 3. **Incremental Iteration**: Break large tasks into small, testable steps.
+# 4. **Leverage Version Control**: Commit frequently and use `git diff` to review changes.
+# 5. **Monitor Security**: Run static analysis and dependency checks on generated code.
+
+# %% [markdown]
 # ## 2. Mixture of Experts (MoE)
 #
 # As models grew to hundreds of billions of parameters, "dense" transformers became prohibitively expensive to run. **Mixture of Experts (MoE)** is a sparse architecture that allows for massive parameter counts with relatively low inference costs.
